@@ -40,7 +40,6 @@ def leer_semana(ruta):
     nombre = os.path.basename(ruta)
     titulo = extraer(r"<title>(.*?)</title>", s) or "Resumen semanal"
     sub = extraer(r'class="sub"[^>]*>(.*?)<', s)
-    # linea secundaria opcional: .variant (skill actual) o .count (formato viejo)
     variant = extraer(r'class="variant"[^>]*>(.*?)<', s)
     count = extraer(r'class="count"[^>]*>(.*?)<', s)
     fecha = fecha_de_nombre(nombre)
@@ -55,7 +54,6 @@ def leer_semana(ruta):
 
 
 def etiqueta_fecha(item):
-    """Texto principal de la tarjeta: usa .sub si existe; si no, la fecha."""
     if item["sub"]:
         return item["sub"]
     f = item["fecha"]
@@ -65,14 +63,11 @@ def etiqueta_fecha(item):
 
 
 def limpio(t):
-    """Deshace entidades del origen y reescapa solo lo imprescindible.
-    Evita el doble escapado (&middot; -> &amp;middot;)."""
     return html.escape(html.unescape(t or ""), quote=True)
 
 
 def tarjeta(item):
     principal = limpio(etiqueta_fecha(item))
-    # linea secundaria: variante si existe; si no, el conteo del formato viejo
     extra = limpio(item["variant"] or item["count"])
     href = "semanas/" + item["archivo"]
     extra_html = ('<p class="wtitle">%s</p>' % extra) if extra else ""
@@ -88,7 +83,6 @@ def tarjeta(item):
 def construir():
     rutas = [p for p in glob.glob(os.path.join(SEMANAS_DIR, "*.html"))]
     items = [leer_semana(p) for p in rutas]
-    # orden: por fecha descendente; los sin fecha, al final por nombre
     items.sort(key=lambda it: (it["fecha"] is not None, it["fecha"] or (0, 0, 0),
                                it["archivo"]), reverse=True)
     tarjetas = "\n".join(tarjeta(it) for it in items) or \
@@ -103,7 +97,7 @@ PLANTILLA = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Resumenes semanales &middot; Infecciosas HCU Zaragoza</title>
+<title>Selección semanal de artículos de enfermedades infecciosas &middot; HCUZ</title>
 <style>
 :root{{
  --bg:#FBF6EC; --card:#FFFFFF; --ink:#403829; --muted:#8F856F; --line:#E7DCC6;
@@ -117,8 +111,13 @@ body{{font-family:"Avenir Next Condensed","Avenir Next","Avenir","Segoe UI",syst
  background:var(--bg); color:var(--ink); line-height:1.5; font-size:20px; -webkit-font-smoothing:antialiased;}}
 .wrap{{max-width:900px;margin:0 auto;padding:0 20px 80px;}}
 header{{text-align:center;padding:44px 18px 6px;}}
-header h1{{margin:0;font-size:38px;font-weight:700;letter-spacing:.3px;color:var(--terra-deep);line-height:1.1;}}
-header .sub{{margin:9px 0 0;color:var(--muted);font-size:18px;}}
+header h1{{margin:0 auto;max-width:760px;font-size:31px;font-weight:700;letter-spacing:.2px;color:var(--terra-deep);line-height:1.15;}}
+header .sub{{margin:10px 0 0;color:var(--terra);font-size:18px;font-weight:600;letter-spacing:.3px;}}
+.metodo{{background:var(--blue-soft);border:1px solid #cfdde8;border-radius:16px;
+ padding:15px 20px;margin:22px 0 6px;font-size:16px;color:var(--blue-deep);line-height:1.5;}}
+.metodo p{{margin:7px 0;}}
+.metodo .aviso{{color:var(--muted);font-size:14px;font-style:italic;}}
+.metodo .gratis{{color:var(--terra-deep);font-weight:700;font-style:normal;}}
 .lead{{color:var(--muted);font-size:17px;margin:22px 2px 6px;}}
 a.week{{display:block;text-decoration:none;color:inherit;background:var(--card);
  border:1px solid var(--line);border-radius:18px;padding:18px 22px;margin:14px 0;
@@ -132,20 +131,24 @@ a.week:hover{{border-color:var(--terra-soft);box-shadow:0 5px 16px rgba(199,126,
 .empty{{color:var(--muted);background:var(--card);border:1px dashed var(--line);
  border-radius:14px;padding:22px;text-align:center;}}
 footer{{text-align:center;color:var(--muted);font-size:13px;padding:34px 0 0;}}
-@media(max-width:560px){{ body{{font-size:18px;}} header h1{{font-size:29px;}} .wdate{{font-size:19px;}} }}
+@media(max-width:560px){{ body{{font-size:18px;}} header h1{{font-size:24px;}} .wdate{{font-size:19px;}} }}
 </style>
 </head>
 <body>
 <header>
- <h1>Resumenes semanales</h1>
- <p class="sub">Enfermedades Infecciosas &middot; HCU Zaragoza</p>
+ <h1>Selección semanal de artículos de enfermedades infecciosas</h1>
+ <p class="sub">(Servicio de EE.II. HCUZ)</p>
 </header>
 <div class="wrap">
- <p class="lead">{frase}. El mas reciente, arriba.</p>
+ <div class="metodo">
+  <p>Revisamos la tabla de contenidos y los artículos en prensa de algunas de las principales revistas de enfermedades infecciosas y seleccionamos lo que nos parece interesante. La síntesis y los resúmenes se elaboran con inteligencia artificial (Claude); nosotros supervisamos y corregimos.</p>
+  <p class="aviso">No nos responsabilizamos si los artículos no te resultan interesantes o los resúmenes contienen errores. <span class="gratis">¡Es gratis!</span></p>
+ </div>
+ <p class="lead">{frase}. El más reciente, arriba.</p>
 
 {tarjetas}
 
- <footer>Portada generada automaticamente. Material docente orientativo.</footer>
+ <footer>Portada generada automáticamente. Material docente orientativo.</footer>
 </div>
 </body>
 </html>
