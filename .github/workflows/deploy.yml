@@ -1,12 +1,10 @@
 name: Publicar web
 
-# Cada vez que subes o cambias algo, reconstruye la portada y publica la web.
 on:
   push:
     branches: [main]
-  workflow_dispatch:   # permite lanzarlo a mano desde la pestaña Actions
+  workflow_dispatch:
 
-# Permisos para publicar en GitHub Pages (se declaran aqui: no hay que tocar ajustes).
 permissions:
   contents: read
   pages: write
@@ -36,9 +34,7 @@ jobs:
 
       - name: Empaquetar la web
         uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
 
       - name: Desplegar en GitHub Pages
         id: deploy
-        uses: actions/deploy-
+        uses: actions/deploy-pages@v4      uses: actions/deploy-
