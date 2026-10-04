@@ -488,10 +488,11 @@ a{color:var(--brand-ink)}
 select{min-height:36px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink-strong);font-size:14.5px;padding:5px 30px 5px 13px;max-width:100%;appearance:none;-webkit-appearance:none;
  background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 17px) 55%,calc(100% - 12px) 55%;background-size:5px 5px;background-repeat:no-repeat;cursor:pointer}
 select.on{border-color:var(--brand);color:var(--brand-ink);font-weight:700}
-.resumen{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:space-between;margin-top:16px;padding-top:12px;border-top:1px solid var(--hair)}
+.resumen{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;justify-content:flex-end;margin-top:16px;padding-top:12px;border-top:1px solid var(--hair)}
 .resumen .vivo{font:600 15px var(--f-head);color:var(--ink-strong)}
 .lnk{background:none;border:0;color:var(--brand-ink);font:700 14px var(--f-head);text-decoration:underline;cursor:pointer;padding:8px 0}
 .hint{font-size:13.5px;color:var(--muted)}
+.fhint{margin:14px 0 4px}
 
 /* resultados */
 .res{margin-top:14px;padding:4px 20px}
@@ -547,6 +548,22 @@ select.on{border-color:var(--brand);color:var(--brand-ink);font-weight:700}
 .pill.sm{min-height:32px;font-size:13.5px;padding:3px 11px}
 .chip.k{border:1px solid var(--line);background:var(--card);cursor:pointer;font-family:var(--f-head)}
 .chip.k:hover{border-color:var(--brand);color:var(--brand-ink)}
+/* plegables del buscador */
+.fold>summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;min-height:44px}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary::before{content:"";width:9px;height:9px;border-right:2.5px solid var(--brand-ink);border-bottom:2.5px solid var(--brand-ink);transform:rotate(-45deg);transition:transform .15s;margin:0 4px 0 2px;flex:none}
+.fold[open]>summary::before{transform:rotate(45deg)}
+#filtros{margin-top:12px;border-top:1px solid var(--hair);padding-top:4px}
+#filtros>summary{font:700 15px var(--f-head);color:var(--brand-ink)}
+.ft-n{display:inline-block;min-width:22px;text-align:center;border-radius:999px;background:var(--brand-solid);color:#fff;font-size:13px;padding:1px 7px}
+.ft-n:empty{display:none}
+.ft-h{font:400 14px var(--f-body);color:var(--muted)}
+.resd{margin-top:14px}
+.resd>summary{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:10px 18px;font:700 16px var(--f-head);color:var(--brand-ink)}
+.resd>summary .sub{font:400 14px var(--f-body);color:var(--muted)}
+.resd[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0}
+.resd .res{margin-top:0;border-top:0;border-top-left-radius:0;border-top-right-radius:0}
+.plegar{display:flex;justify-content:center;padding:6px 0 16px}
 mark{background:var(--mark);color:inherit;padding:0 2px;border-radius:3px}
 .mas{display:flex;justify-content:center;padding:14px 0 18px}
 .btn{border:1px solid var(--brand);background:var(--card);color:var(--brand-ink);border-radius:999px;min-height:44px;padding:8px 22px;font:700 15px var(--f-head);cursor:pointer}
@@ -630,6 +647,7 @@ footer p{margin:0 0 6px}
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
     <input id="q" type="search" placeholder="Palabra, fármaco, microorganismo, autor…" aria-label="Buscar en los artículos" autocomplete="off">
    </div>
+   <details class="fold" id="filtros"><summary><span class="ft-t">Filtros</span> <span class="ft-n" id="ft-n"></span><span class="ft-h">categoría, palabra clave, tipo, revista y fecha</span></summary>
    <div class="frow"><span class="lbl" id="l-area">Categoría</span><div class="pills" id="f-area" role="group" aria-labelledby="l-area"></div></div>
    <div class="frow"><span class="lbl" id="l-kw">Palabra clave</span><div class="kwbox">
      <div class="kwin"><div id="kw-sel" class="kwsel"></div><input id="kw" type="text" placeholder="Escribe: neumonía, inmunodeprimido, S. aureus…" aria-labelledby="l-kw" autocomplete="off" role="combobox" aria-controls="kw-sug" aria-autocomplete="list"></div>
@@ -642,10 +660,13 @@ footer p{margin:0 0 6px}
      <select id="f-per" aria-label="Periodo"></select>
      <button class="pill star-t" type="button" id="f-est" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.7l3.1 6.6 7.2.9-5.3 4.9 1.4 7.2-6.4-3.6-6.4 3.6 1.4-7.2L1.7 9.2l7.2-.9z"/></svg>Solo destacados</button>
    </div></div>
-   <div class="resumen"><span class="vivo" id="vivo" aria-live="polite"></span><span><button class="lnk" type="button" id="copiar">Copiar enlace a esta búsqueda</button><span id="limpiar-w"> · <button class="lnk" type="button" id="limpiar">Limpiar</button></span></span></div>
+   <p class="hint fhint">En categoría, tipo y revista puedes marcar varias: salen los artículos de cualquiera de ellas. Las palabras clave se suman: neumonía e inmunodeprimido no VIH trae los que tienen las dos. Toca una palabra clave de un resultado para filtrar por ella. Cada resultado abre la ficha dentro de su semana.</p>
+   </details>
+   <div class="resumen"><span class="vivo" id="vivo" hidden></span><span><button class="lnk" type="button" id="copiar">Copiar enlace a esta búsqueda</button><span id="limpiar-w"> · <button class="lnk" type="button" id="limpiar">Limpiar</button></span></span></div>
   </div>
-  <div class="card res" id="res"></div>
-  <p class="hint">En categoría, tipo y revista puedes marcar varias: salen los artículos de cualquiera de ellas. Las palabras clave se suman: neumonía e inmunodeprimido no VIH trae los que tienen las dos. Toca una palabra clave de un resultado para filtrar por ella. Cada resultado abre la ficha dentro de su semana.</p>
+  <details class="fold resd" id="resd"><summary id="res-sum" aria-live="polite"></summary>
+   <div class="card res" id="res"></div>
+  </details>
  </section>
 
  <section id="semanas">
@@ -834,13 +855,20 @@ function render(){
  if(state.q)partes.push('«'+state.q+'»');
  $('#vivo').textContent=r.length+(r.length===1?' artículo':' artículos')+(partes.length?' · '+partes.join(' · '):' · los más recientes primero');
  $('#limpiar-w').hidden=!partes.length;
+ var nf=state.area.length+state.tipo.length+state.rev.length+state.clave.length+(state.per?1:0)+(state.est?1:0);
+ $('#ft-n').textContent=nf?String(nf):'';
+ var abierto=$('#resd').open;
+ $('#res-sum').innerHTML=(abierto?'Ocultar ':'Ver ')+(r.length===1?'el artículo':'los '+r.length+' artículos')+
+  ' <span class="sub">'+(partes.length?esc(partes.join(' · ')):'los más recientes primero')+'</span>';
  var el=$('#res');
- if(!r.length){el.innerHTML='<div class="vacio">Ningún artículo cumple todo a la vez. Prueba a quitar un filtro o una palabra clave.</div>';return;}
+ if(!r.length){$('#res-sum').innerHTML=(abierto?'Ocultar los resultados':'Ningún artículo')+' <span class="sub">'+esc(partes.join(' · '))+'</span>';el.innerHTML='<div class="vacio">Ningún artículo cumple todo a la vez. Prueba a quitar un filtro o una palabra clave.</div>';return;}
  el.innerHTML=r.slice(0,state.ver).map(tarjeta).join('')+
-  (r.length>state.ver?'<div class="mas"><button class="btn" type="button" id="mas">Ver '+Math.min(PASO,r.length-state.ver)+' más (quedan '+(r.length-state.ver)+')</button></div>':'');
+  (r.length>state.ver?'<div class="mas"><button class="btn" type="button" id="mas">Ver '+Math.min(PASO,r.length-state.ver)+' más (quedan '+(r.length-state.ver)+')</button></div>':'')+
+  '<div class="plegar"><button class="lnk" type="button" id="plegar">Plegar los resultados</button></div>';
  var m=$('#mas'); if(m) m.addEventListener('click',function(){state.ver+=PASO;render();});
+ $('#plegar').addEventListener('click',function(){$('#resd').open=false;$('#res-sum').scrollIntoView({block:'nearest'});});
 }
-function cambia(){state.ver=PASO;escribirHash();render();}
+function cambia(){state.ver=PASO;$('#resd').open=true;escribirHash();render();}
 
 function botonera(sel,campo){$(sel).addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;
  if(!b.dataset.v)state[campo]=[];else quita(state[campo],b.dataset.v);cambia();});}
@@ -869,8 +897,11 @@ $('#copiar').addEventListener('click',function(){var b=this,u=location.href,ok=f
  var fb=function(){var a=document.createElement('textarea');a.value=u;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');ok();}catch(e){}a.remove();};
  navigator.clipboard?navigator.clipboard.writeText(u).then(ok,fb):fb();});
 window.addEventListener('hashchange',function(){leerHash();render();});
+$('#resd').addEventListener('toggle',render);
+function abrirSiHay(){var f=state.area.length||state.tipo.length||state.rev.length||state.clave.length||state.per||state.est;
+ if(f)$('#filtros').open=true; if(f||state.q)$('#resd').open=true;}
 
-leerHash();
+leerHash();abrirSiHay();
 if(window.fetch&&location.protocol!=='file:'){
  fetch('indice.json').then(function(r){return r.ok?r.json():null;}).then(function(ix){
   if(!ix) return; ART.forEach(function(a){var t=ix[a.semana+'#'+a.id]; if(t) a._h+=' '+t;}); render();
