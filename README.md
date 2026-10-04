@@ -5,10 +5,10 @@ Web con la selección y síntesis semanal de artículos del Servicio de Enfermed
 ## Qué hay aquí
 
 - `semanas/` — un HTML por semana. Nombre con fecha: `resumen-AAAA-MM-DD.html`.
-- `build_index.py` — construye la portada leyendo la carpeta `semanas/`. No hay que ejecutarlo a mano.
+- `build_index.py` — construye la portada leyendo la carpeta `semanas/`: la última semana, el buscador de artículos (tema, tipo de estudio, revista, periodo, destacados y texto libre) y el listado de semanas. Lee los artículos de las fichas de cada semana, así que no hay ninguna lista que mantener. Genera también `catalogo.json` (un registro por artículo) e `indice.json` (texto completo para el buscador). No hay que ejecutarlo a mano.
 - `.github/workflows/deploy.yml` — automatización: al subir algo, reconstruye la portada y publica la web.
 
-`index.html` (la portada) no está en el repositorio a propósito: se genera en cada publicación. No se edita a mano.
+`index.html` (la portada), `catalogo.json` e `indice.json` no están en el repositorio a propósito: se genera en cada publicación. No se edita a mano.
 
 ## Rutina de cada semana
 
