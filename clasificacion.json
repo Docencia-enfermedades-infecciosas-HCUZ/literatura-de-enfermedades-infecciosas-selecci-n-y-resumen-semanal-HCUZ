@@ -1,0 +1,1219 @@
+{
+ "resumen-2026-07-26.html#duerlund-2026-encefalitis-infecciosa-poblacional": {
+  "area": "sindromes",
+  "claves": [
+   "snc",
+   "herpesvirus"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-07-26.html#fillatre-2026-editorial-encefalitis-observacional": {
+  "area": "sindromes",
+  "claves": [
+   "snc",
+   "herpesvirus"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-07-26.html#kunnathu-puthanveedu-2026-infecciones-derivaciones-lcr": {
+  "area": "sindromes",
+  "claves": [
+   "snc",
+   "dispositivo"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-07-26.html#tzimas-2026-valve-strands-endocarditis": {
+  "area": "sindromes",
+  "claves": [
+   "endocarditis"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-07-26.html#yakubu-2026-correspondencia-valve-strands-sesgo-deteccion": {
+  "area": "sindromes",
+  "claves": [
+   "endocarditis"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-07-26.html#hendriks-2026-hemocultivos-seguimiento-skip-phenomenon-sab": {
+  "area": "sindromes",
+  "claves": [
+   "bacteriemia",
+   "saureus"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-07-26.html#martin-tong-2026-editorial-hemocultivos-seguimiento-sab": {
+  "area": "sindromes",
+  "claves": [
+   "bacteriemia",
+   "saureus"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-07-26.html#brizuela-2026-streptococcus-suis-zoonotico-mdr-tailandia": {
+  "area": "patogenos",
+  "claves": [
+   "estreptococo",
+   "genomica"
+  ],
+  "tipo": "microbiologico"
+ },
+ "resumen-2026-07-26.html#ernst-2026-klebsiella-heterovirulencia-absceso-cerebral": {
+  "area": "casos",
+  "claves": [
+   "snc",
+   "itu",
+   "genomica"
+  ],
+  "tipo": "caso"
+ },
+ "resumen-2026-07-26.html#woo-2026-fracaso-renal-agudo-salmonella-campylobacter": {
+  "area": "sindromes",
+  "claves": [],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-07-26.html#sunshine-2026-quantiferon-ifng-progresion-tb": {
+  "area": "tuberculosis",
+  "claves": [
+   "diagnostico-rapido"
+  ],
+  "tipo": "diagnostico"
+ },
+ "resumen-2026-07-26.html#gulick-2026-tar-revision-nejm": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "revision"
+ },
+ "resumen-2026-07-26.html#dyer-2026-resistencia-insti-tratamiento-ltbi-vih": {
+  "area": "casos",
+  "claves": [
+   "pkpd",
+   "profilaxis"
+  ],
+  "tipo": "caso"
+ },
+ "resumen-2026-07-26.html#geretti-2026-ensayos-carga-viral-viremia-bajo-nivel": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "diagnostico"
+ },
+ "resumen-2026-07-26.html#duarte-2026-cab-rpv-la-segunda-linea-embarazo-kenia": {
+  "area": "vih",
+  "claves": [
+   "embarazo"
+  ],
+  "tipo": "modelizacion"
+ },
+ "resumen-2026-07-26.html#grzybek-2026-hantavirus-europa-preparacion": {
+  "area": "emergentes",
+  "claves": [],
+  "tipo": "revision"
+ },
+ "resumen-2026-07-26.html#page-2026-coinfeccion-bacteriana-fiebres-hemorragicas": {
+  "area": "importadas",
+  "claves": [
+   "sepsis"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-07-26.html#milburn-2026-manejo-ambulatorio-malaria-importada": {
+  "area": "importadas",
+  "claves": [
+   "parasitos"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-07-26.html#lass-florl-2026-test-sensibilidad-antifungica-mic": {
+  "area": "antimicrobianos",
+  "claves": [
+   "candida",
+   "filamentosos"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-07-26.html#sealey-2026-ecoli-resistente-carne-cruda-comida-perro": {
+  "area": "antimicrobianos",
+  "claves": [
+   "genomica"
+  ],
+  "tipo": "microbiologico"
+ },
+ "resumen-2026-07-26.html#bock-2026-moxifloxacino-oral-efaecalis-endocarditis": {
+  "area": "antimicrobianos",
+  "claves": [
+   "endocarditis",
+   "enterococo",
+   "pkpd",
+   "via-oral"
+  ],
+  "tipo": "estudio"
+ },
+ "resumen-2026-07-26.html#becken-2026-fagoterapia-mabscessus-mastoiditis": {
+  "area": "casos",
+  "claves": [
+   "mnt",
+   "fagos",
+   "dispositivo",
+   "pediatria"
+  ],
+  "tipo": "caso"
+ },
+ "resumen-2026-07-26.html#abdulaziz-2026-stewardship-ecmo": {
+  "area": "proa",
+  "claves": [
+   "critico",
+   "pkpd"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-07-26.html#drozdinsky-2026-doxiciclina-nac-leve-ambulatoria": {
+  "area": "sindromes",
+  "claves": [
+   "neumonia",
+   "primaria"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-07-26.html#nir-paz-2026-consentimiento-informado-cmi": {
+  "area": "antimicrobianos",
+  "claves": [
+   "fagos"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-07-26.html#hurley-2026-sheet-sdd-herd-effects": {
+  "area": "saludpublica",
+  "claves": [
+   "critico",
+   "profilaxis",
+   "transmision"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-07-26.html#fafi-2026-nirsevimab-enfermedad-neumococica-invasiva": {
+  "area": "saludpublica",
+  "claves": [
+   "estreptococo",
+   "virus-respiratorios",
+   "pediatria",
+   "vacunas"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-07-26.html#perez-martinez-2026-comentario-valor-ampliado-prevencion-vrs": {
+  "area": "saludpublica",
+  "claves": [
+   "estreptococo",
+   "virus-respiratorios",
+   "pediatria",
+   "vacunas"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-07-26.html#tinggaard-2026-portador-neumococo-mayores-dinamarca": {
+  "area": "saludpublica",
+  "claves": [
+   "estreptococo",
+   "ancianos",
+   "vacunas"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-07-26.html#mimura-2026-momento-vacunacion-gripe-venus": {
+  "area": "saludpublica",
+  "claves": [
+   "vacunas",
+   "virus-respiratorios",
+   "ancianos"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-07-26.html#tsiodras-2026-lenguaje-confianza-polio-comunicacion": {
+  "area": "saludpublica",
+  "claves": [
+   "vacunas"
+  ],
+  "tipo": "guia"
+ },
+ "resumen-2026-07-26.html#gupta-2026-vias-transmision-infecciones-emergentes": {
+  "area": "emergentes",
+  "claves": [],
+  "tipo": "revision"
+ },
+ "resumen-2026-07-26.html#who-africacdc-2026-brecha-diagnosticos-terapeuticos-brotes": {
+  "area": "saludpublica",
+  "claves": [
+   "diagnostico-rapido"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-07-26.html#abdulnour-2026-crew-resource-management-ia": {
+  "area": "ia",
+  "claves": [],
+  "tipo": "editorial"
+ },
+ "resumen-2026-08-06.html#zenner-2026-estado-epidemia-global-tb": {
+  "area": "tuberculosis",
+  "claves": [],
+  "tipo": "revision"
+ },
+ "resumen-2026-08-06.html#walzl-2026-avances-diagnostico-biomarcadores-tb": {
+  "area": "tuberculosis",
+  "claves": [
+   "diagnostico-rapido"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-08-06.html#marais-2026-avances-tratamiento-tb": {
+  "area": "tuberculosis",
+  "claves": [
+   "duracion",
+   "nuevos-antimicrobianos"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-08-06.html#da-costa-2026-vacunas-tpt-tb": {
+  "area": "tuberculosis",
+  "claves": [
+   "vacunas",
+   "profilaxis"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-08-06.html#medina-marino-2026-torunda-lingual-contactos-domiciliarios": {
+  "area": "tuberculosis",
+  "claves": [
+   "diagnostico-rapido"
+  ],
+  "tipo": "diagnostico"
+ },
+ "resumen-2026-08-06.html#gulick-2026-tar-revision-nejm": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "revision"
+ },
+ "resumen-2026-08-06.html#rockstroh-2026-islend1-islatravir-lenacapavir-semanal": {
+  "area": "vih",
+  "claves": [
+   "nuevos-antimicrobianos"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-08-06.html#griesel-2026-vh-499-inhibidor-capside-cinnamon": {
+  "area": "vih",
+  "claves": [
+   "nuevos-antimicrobianos"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-08-06.html#yao-2026-regimenes-comprimido-unico-vs-multiple-vih": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-06.html#clemente-2026-consenso-viremia-bajo-nivel": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "guia"
+ },
+ "resumen-2026-08-06.html#atias-2026-prep-intensidad-cribado-its-prescripcion": {
+  "area": "vih",
+  "claves": [
+   "profilaxis"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-06.html#pineiro-2026-consenso-its-seimc-resumen-ejecutivo": {
+  "area": "its",
+  "claves": [],
+  "tipo": "guia"
+ },
+ "resumen-2026-08-06.html#gao-2026-stenotrophomonas-nma-regimenes": {
+  "area": "patogenos",
+  "claves": [],
+  "tipo": "revision"
+ },
+ "resumen-2026-08-06.html#armstrong-2026-antianaerobios-mortalidad-microbioma-balance": {
+  "area": "proa",
+  "claves": [
+   "bacteriemia"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-06.html#kolodyazhna-2026-editorial-anti-anaerobios-microbioma": {
+  "area": "proa",
+  "claves": [
+   "bacteriemia",
+   "critico"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-08-06.html#hassoun-kheir-2026-cribado-mdro-empirico-uci-eurobact2": {
+  "area": "proa",
+  "claves": [
+   "bacteriemia",
+   "critico"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-24.html#zazueta-2026-ipt-infeccion-progresion-tb-lima": {
+  "area": "tuberculosis",
+  "claves": [
+   "profilaxis",
+   "pediatria"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-24.html#chivite-2026-seguimiento-anual-vs-semestral-vih": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-08-24.html#vera-2026-scope-vih-usuarios-prep-espana": {
+  "area": "vih",
+  "claves": [
+   "profilaxis"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-24.html#etienney-2026-apaches-hsil-anal-evolucion-5-anos": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-24.html#adachi-2026-vhb-retirada-tar-anti-vhb": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-24.html#kim-2026-bcid2-ecr-hemocultivos": {
+  "area": "proa",
+  "claves": [
+   "bacteriemia",
+   "diagnostico-rapido"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-08-24.html#hedin-2026-reduccion-prescripcion-ap-complicaciones": {
+  "area": "proa",
+  "claves": [
+   "primaria"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-24.html#fihman-2026-drop-the-mics": {
+  "area": "antimicrobianos",
+  "claves": [
+   "pkpd"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-08-24.html#bracke-2026-car-t-infecciones-fungicas-invasivas": {
+  "area": "patogenos",
+  "claves": [
+   "filamentosos",
+   "inmunodeprimido"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-08-24.html#mo-2026-acorn-hai-iras-resistencia-asia": {
+  "area": "antimicrobianos",
+  "claves": [
+   "bacteriemia",
+   "neumonia",
+   "acinetobacter"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-24.html#abejez-arrizabalaga-2026-evaluacion-adversarial-llm-ams": {
+  "area": "ia",
+  "claves": [],
+  "tipo": "estudio"
+ },
+ "resumen-2026-08-24.html#flanagin-2026-guia-uso-ia-publicacion-medica": {
+  "area": "ia",
+  "claves": [],
+  "tipo": "editorial"
+ },
+ "resumen-2026-08-24.html#emanuel-2026-ia-autonoma-frente-a-medico-asistido": {
+  "area": "ia",
+  "claves": [],
+  "tipo": "editorial"
+ },
+ "resumen-2026-08-24.html#ramirez-olivencia-2026-cchf-favipiravir-avatrombopag": {
+  "area": "casos",
+  "claves": [
+   "arbovirus"
+  ],
+  "tipo": "caso"
+ },
+ "resumen-2026-08-24.html#harryvan-2026-echovirus-11-hepatitis-inmunodeprimido": {
+  "area": "casos",
+  "claves": [
+   "inmunodeprimido"
+  ],
+  "tipo": "caso"
+ },
+ "resumen-2026-08-24.html#aslam-2026-snipr001-malacoplaquia-trasplante-renal": {
+  "area": "casos",
+  "claves": [
+   "fagos",
+   "inmunodeprimido"
+  ],
+  "tipo": "caso"
+ },
+ "resumen-2026-08-24.html#desmoulin-2026-reinfeccion-chikungunya-lupus": {
+  "area": "casos",
+  "claves": [
+   "arbovirus",
+   "inmunodeprimido"
+  ],
+  "tipo": "caso"
+ },
+ "resumen-2026-08-24.html#chua-2026-sarcocystis-incidental-mastectomia": {
+  "area": "casos",
+  "claves": [
+   "parasitos"
+  ],
+  "tipo": "caso"
+ },
+ "resumen-2026-08-30.html#bundgaard-2026-poet-ii-duracion-antibiotica-endocarditis": {
+  "area": "sindromes",
+  "claves": [
+   "endocarditis",
+   "duracion"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-08-30.html#bishop-2026-cdi-dismotilidad-presentacion-atipica": {
+  "area": "patogenos",
+  "claves": [
+   "cdifficile"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-30.html#petri-2026-editorial-cdi-sin-diarrea": {
+  "area": "patogenos",
+  "claves": [
+   "cdifficile"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-08-30.html#bongiovanni-2026-carta-la-cab-rpv-viremia": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "editorial"
+ },
+ "resumen-2026-08-30.html#tran-2026-autoanticuerpos-ifn-chikungunya-snc": {
+  "area": "importadas",
+  "claves": [
+   "arbovirus",
+   "snc"
+  ],
+  "tipo": "microbiologico"
+ },
+ "resumen-2026-08-30.html#mokrani-2026-stenotrophomonas-dtr-neumonia-uci": {
+  "area": "sindromes",
+  "claves": [
+   "neumonia",
+   "critico"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-30.html#rhee-2026-idsa-estrategias-hospitalarias-sepsis": {
+  "area": "sindromes",
+  "claves": [
+   "sepsis",
+   "diagnostico-rapido"
+  ],
+  "tipo": "guia"
+ },
+ "resumen-2026-08-30.html#zhang-2026-progress-ddpcr-sepsis": {
+  "area": "proa",
+  "claves": [
+   "sepsis",
+   "diagnostico-rapido"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-08-30.html#schweizer-2026-entrada-generica-antibioticos-ultimo-recurso": {
+  "area": "proa",
+  "claves": [],
+  "tipo": "estudio"
+ },
+ "resumen-2026-08-30.html#vuong-2026-nuevos-antifungicos-enfermedad-fungica-invasora": {
+  "area": "antimicrobianos",
+  "claves": [
+   "filamentosos",
+   "nuevos-antimicrobianos"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-08-30.html#denning-2026-copd-aspergillus": {
+  "area": "patogenos",
+  "claves": [
+   "filamentosos"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-08-30.html#cona-2026-donor-bsi-no-reconocida-trasplante": {
+  "area": "sindromes",
+  "claves": [
+   "bacteriemia",
+   "inmunodeprimido"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-30.html#giannella-2026-editorial-donor-bsi-trasplante": {
+  "area": "sindromes",
+  "claves": [
+   "bacteriemia",
+   "inmunodeprimido"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-08-30.html#kaufman-2026-transfusion-alpha-gal-trags": {
+  "area": "medicina",
+  "claves": [],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-08-30.html#alexakis-2026-roles-evolutivos-infectologo": {
+  "area": "medicina",
+  "claves": [],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-06.html#tzimas-2026-engrosamiento-velos": {
+  "area": "sindromes",
+  "claves": [
+   "endocarditis"
+  ],
+  "tipo": "diagnostico"
+ },
+ "resumen-2026-09-06.html#xu-2026-editorial-velos": {
+  "area": "sindromes",
+  "claves": [
+   "endocarditis"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-06.html#vaselli-2026-fenotipado-bacteriemias": {
+  "area": "sindromes",
+  "claves": [
+   "bacteriemia",
+   "saureus"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-09-06.html#trautner-2026-bacteriuria-embarazo": {
+  "area": "sindromes",
+  "claves": [
+   "itu",
+   "embarazo"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-06.html#pallotta-2026-cefepime-piptazo-pseudomonas": {
+  "area": "sindromes",
+  "claves": [
+   "neumonia",
+   "pseudomonas"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-06.html#marando-2026-pcp-ct-bdg": {
+  "area": "patogenos",
+  "claves": [
+   "neumonia",
+   "diagnostico-rapido"
+  ],
+  "tipo": "diagnostico"
+ },
+ "resumen-2026-09-06.html#ogrinc-2026-lcr-neuroborreliosis": {
+  "area": "patogenos",
+  "claves": [
+   "snc"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-06.html#coe-2026-candida-respiratoria": {
+  "area": "proa",
+  "claves": [
+   "candida"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-06.html#mori-2026-pielonefritis-cuti": {
+  "area": "antimicrobianos",
+  "claves": [
+   "itu",
+   "nuevos-antimicrobianos"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-09-06.html#steele-2026-pcr-sinovial": {
+  "area": "sindromes",
+  "claves": [
+   "osteoarticular",
+   "diagnostico-rapido",
+   "urgencias"
+  ],
+  "tipo": "diagnostico"
+ },
+ "resumen-2026-09-06.html#chen-2026-cab-rpv-la-viremia": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-09-06.html#chiosi-2026-editorial-la": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-06.html#havens-2026-impacto-financiero-la": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-06.html#fryhofer-2026-vip-confianza": {
+  "area": "saludpublica",
+  "claves": [
+   "vacunas",
+   "virus-respiratorios"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-06.html#lipson-2026-covid-vip": {
+  "area": "saludpublica",
+  "claves": [
+   "vacunas",
+   "virus-respiratorios"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-09-06.html#senerth-2026-vrs-vip": {
+  "area": "saludpublica",
+  "claves": [
+   "vacunas",
+   "virus-respiratorios",
+   "embarazo",
+   "pediatria"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-09-06.html#senerth-2026-gripe-vip": {
+  "area": "saludpublica",
+  "claves": [
+   "vacunas",
+   "virus-respiratorios",
+   "ancianos"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-09-06.html#roch-2026-clorhexidina-klebsiella": {
+  "area": "antimicrobianos",
+  "claves": [
+   "carbapenemasas",
+   "genomica"
+  ],
+  "tipo": "microbiologico"
+ },
+ "resumen-2026-09-06.html#zavala-2026-tele-id": {
+  "area": "medicina",
+  "claves": [],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-13.html#desimone-2026-aha-endocarditis": {
+  "area": "sindromes",
+  "claves": [
+   "endocarditis"
+  ],
+  "tipo": "guia"
+ },
+ "resumen-2026-09-13.html#aceves-2026-tb-extrapulmonar": {
+  "area": "tuberculosis",
+  "claves": [],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-13.html#jones-2026-candidemia-houston": {
+  "area": "patogenos",
+  "claves": [
+   "candida"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-13.html#hardy-2026-cefiderocol-door": {
+  "area": "antimicrobianos",
+  "claves": [
+   "bacteriemia",
+   "nuevos-antimicrobianos"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-09-13.html#chiotos-2026-vancomicina-ucip": {
+  "area": "proa",
+  "claves": [
+   "pediatria",
+   "critico"
+  ],
+  "tipo": "estudio"
+ },
+ "resumen-2026-09-13.html#crowley-2026-antibioticos-hospice": {
+  "area": "proa",
+  "claves": [],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-13.html#karlin-2026-editorial-hospice": {
+  "area": "proa",
+  "claves": [],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-13.html#zhazykhbayeva-2026-proa-conductual": {
+  "area": "proa",
+  "claves": [
+   "primaria"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-09-13.html#fassbind-2026-metenamina-endourologica": {
+  "area": "sindromes",
+  "claves": [
+   "itu",
+   "profilaxis"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-09-13.html#ohara-2026-cauris-guantes-batas": {
+  "area": "saludpublica",
+  "claves": [
+   "candida",
+   "transmision"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-13.html#redmond-2026-cdi-wgs-habitacion": {
+  "area": "saludpublica",
+  "claves": [
+   "cdifficile",
+   "transmision",
+   "genomica"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-13.html#goto-2026-editorial-cdi": {
+  "area": "saludpublica",
+  "claves": [
+   "cdifficile",
+   "transmision"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-20.html#mcnally-2026-solario-antibiotico-corto-local-ortopedia": {
+  "area": "sindromes",
+  "claves": [
+   "osteoarticular",
+   "dispositivo",
+   "duracion"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-09-20.html#radcliffe-2026-margen-reseccion-pie-diabetico-viewpoint": {
+  "area": "sindromes",
+  "claves": [
+   "osteoarticular",
+   "duracion"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-20.html#motaganahalli-2026-carta-margenes-oseos-pie-diabetico": {
+  "area": "sindromes",
+  "claves": [
+   "osteoarticular",
+   "duracion"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-20.html#radcliffe-2026-reply-margen-limpio-pie-diabetico": {
+  "area": "sindromes",
+  "claves": [
+   "osteoarticular",
+   "duracion"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-20.html#tomasino-2026-besos-diferencias-sexo-ei-quirurgica": {
+  "area": "sindromes",
+  "claves": [
+   "endocarditis"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-20.html#bhattarai-2026-cultivo-valvular-positivo-endocarditis": {
+  "area": "sindromes",
+  "claves": [
+   "endocarditis",
+   "duracion"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-20.html#agudelo-2026-mngs-heces-tb-pediatrica-uganda": {
+  "area": "tuberculosis",
+  "claves": [
+   "pediatria",
+   "diagnostico-rapido",
+   "genomica"
+  ],
+  "tipo": "diagnostico"
+ },
+ "resumen-2026-09-20.html#ghosn-2026-vogue-dtg-3tc-vs-bic-ftc-taf": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-09-20.html#reed-2026-coste-dalbavancina-dots": {
+  "area": "sindromes",
+  "claves": [
+   "bacteriemia",
+   "saureus",
+   "tade"
+  ],
+  "tipo": "estudio"
+ },
+ "resumen-2026-09-20.html#ortiz-fernandez-2026-coinfecciones-malaria-importada-grave": {
+  "area": "importadas",
+  "claves": [
+   "parasitos",
+   "bacteriemia"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-09-20.html#mizrahi-2026-diagnostic-stewardship-sfm-posicion": {
+  "area": "proa",
+  "claves": [
+   "diagnostico-rapido"
+  ],
+  "tipo": "guia"
+ },
+ "resumen-2026-09-20.html#trubiano-2026-desetiquetado-alergia-implementacion-ams": {
+  "area": "proa",
+  "claves": [
+   "alergia"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-20.html#sawey-2026-eventos-adversos-orales-copat": {
+  "area": "proa",
+  "claves": [
+   "tade",
+   "via-oral"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-20.html#freret-2026-adopcion-azitromicina-cesarea": {
+  "area": "proa",
+  "claves": [
+   "profilaxis",
+   "embarazo"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-20.html#tita-2026-editorial-azitromicina-cesarea": {
+  "area": "proa",
+  "claves": [
+   "profilaxis",
+   "embarazo"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-27.html#ramos-martinez-2026-pacto-endocarditis-scn": {
+  "area": "sindromes",
+  "claves": [
+   "bacteriemia",
+   "endocarditis"
+  ],
+  "tipo": "diagnostico"
+ },
+ "resumen-2026-09-27.html#vena-2026-control-foco-pseudomonas": {
+  "area": "sindromes",
+  "claves": [
+   "bacteriemia",
+   "pseudomonas"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-27.html#petersiel-2026-betalactamico-lra-camera2": {
+  "area": "sindromes",
+  "claves": [
+   "bacteriemia",
+   "saureus"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-27.html#al-zergani-2026-muerte-nac": {
+  "area": "sindromes",
+  "claves": [
+   "neumonia"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-27.html#selemon-2026-tpt-inmunosupresion": {
+  "area": "tuberculosis",
+  "claves": [
+   "inmunodeprimido",
+   "profilaxis"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-09-27.html#mendu-2026-tar-cancer-anogenital": {
+  "area": "vih",
+  "claves": [],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-27.html#glismann-2026-sifilis-ictus": {
+  "area": "its",
+  "claves": [
+   "snc"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-27.html#li-2026-profilaxis-antifungica-iapa": {
+  "area": "patogenos",
+  "claves": [
+   "filamentosos",
+   "virus-respiratorios",
+   "critico",
+   "profilaxis"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-27.html#gupta-2026-sinusitis-fungica-hemopatia": {
+  "area": "patogenos",
+  "claves": [
+   "filamentosos",
+   "inmunodeprimido"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-27.html#wang-2026-virus-oya": {
+  "area": "casos",
+  "claves": [
+   "arbovirus"
+  ],
+  "tipo": "caso"
+ },
+ "resumen-2026-09-27.html#pai-mangalore-2026-individualizacion-betalactamicos": {
+  "area": "antimicrobianos",
+  "claves": [
+   "pkpd",
+   "critico"
+  ],
+  "tipo": "editorial"
+ },
+ "resumen-2026-09-27.html#chiriac-2026-piperacilina-tdm": {
+  "area": "antimicrobianos",
+  "claves": [
+   "pkpd",
+   "critico"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-27.html#haynes-2026-cefalexina-dosis-pediatrica": {
+  "area": "antimicrobianos",
+  "claves": [
+   "pkpd",
+   "pediatria"
+  ],
+  "tipo": "modelizacion"
+ },
+ "resumen-2026-09-27.html#sahlstrom-mansson-2026-terapia-efectiva-blee": {
+  "area": "sindromes",
+  "claves": [
+   "bacteriemia",
+   "blee"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-27.html#liu-2026-duracion-corta-itu-ninos": {
+  "area": "sindromes",
+  "claves": [
+   "itu",
+   "pediatria",
+   "duracion"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-09-27.html#lewis-2026-vacuna-gripe-hospitalizacion": {
+  "area": "saludpublica",
+  "claves": [
+   "vacunas",
+   "virus-respiratorios",
+   "inmunodeprimido"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-27.html#bang-2026-contagiosidad-gripe-covid": {
+  "area": "saludpublica",
+  "claves": [
+   "virus-respiratorios",
+   "transmision"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-09-27.html#yusuf-2026-sesgos-dags": {
+  "area": "medicina",
+  "claves": [],
+  "tipo": "revision"
+ },
+ "resumen-2026-09-27.html#nagavci-2026-escmid-consenso-guias": {
+  "area": "medicina",
+  "claves": [],
+  "tipo": "guia"
+ },
+ "resumen-2026-10-04.html#brown-2026-supercontagiadores-transmision-tb": {
+  "area": "tuberculosis",
+  "claves": [],
+  "tipo": "revision"
+ },
+ "resumen-2026-10-04.html#rockstroh-2026-islend1-islatravir-lenacapavir-semanal": {
+  "area": "vih",
+  "claves": [
+   "nuevos-antimicrobianos"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-10-04.html#goel-2026-resolve-sofosbuvir-velpatasvir-8-vs-12-semanas": {
+  "area": "hepatitis",
+  "claves": [
+   "duracion"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-10-04.html#ellis-2026-viremia-cmv-mortalidad-vih-avanzado-sudafrica": {
+  "area": "vih",
+  "claves": [
+   "herpesvirus"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-10-04.html#crandell-2026-neutralizacion-mpxv-clados-vacuna-infeccion": {
+  "area": "emergentes",
+  "claves": [
+   "vacunas"
+  ],
+  "tipo": "microbiologico"
+ },
+ "resumen-2026-10-04.html#smith-2026-melioidosis-omitir-erradicacion-eca-piloto": {
+  "area": "importadas",
+  "claves": [
+   "duracion",
+   "via-oral"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-10-04.html#zeleke-2026-pldh-prueba-rapida-malaria-deleciones-pfhrp2-etiopia": {
+  "area": "importadas",
+  "claves": [
+   "parasitos",
+   "diagnostico-rapido"
+  ],
+  "tipo": "diagnostico"
+ },
+ "resumen-2026-10-04.html#naidoo-2026-nipah-parametros-epidemiologicos-rs": {
+  "area": "importadas",
+  "claves": [],
+  "tipo": "revision"
+ },
+ "resumen-2026-10-04.html#vasseur-2026-convergencia-carbapenemasas-hipervirulencia-kp-europa-rs": {
+  "area": "antimicrobianos",
+  "claves": [
+   "carbapenemasas",
+   "genomica"
+  ],
+  "tipo": "revision"
+ },
+ "resumen-2026-10-04.html#escribano-2026-rezafungina-actividad-in-vitro-candida-eucast": {
+  "area": "antimicrobianos",
+  "claves": [
+   "candida",
+   "nuevos-antimicrobianos"
+  ],
+  "tipo": "microbiologico"
+ },
+ "resumen-2026-10-04.html#polverino-2026-ers-escmid-pruebas-rapidas-irvb": {
+  "area": "proa",
+  "claves": [
+   "neumonia",
+   "diagnostico-rapido"
+  ],
+  "tipo": "guia"
+ },
+ "resumen-2026-10-04.html#van-daalen-2026-guia-swab-nvalt-nac-adultos": {
+  "area": "sindromes",
+  "claves": [
+   "neumonia",
+   "duracion"
+  ],
+  "tipo": "guia"
+ },
+ "resumen-2026-10-04.html#ingelbeen-2026-cabu-eico-antibioticos-watch-comunidad": {
+  "area": "proa",
+  "claves": [
+   "primaria"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-10-04.html#schwartz-2026-adecuacion-antibioticos-mayores-65": {
+  "area": "proa",
+  "claves": [
+   "ancianos",
+   "primaria"
+  ],
+  "tipo": "cohorte"
+ },
+ "resumen-2026-10-04.html#heinsbroek-2026-brote-hidrico-mabscessus-papworth": {
+  "area": "saludpublica",
+  "claves": [
+   "mnt",
+   "transmision",
+   "genomica"
+  ],
+  "tipo": "brote"
+ },
+ "resumen-2026-10-04.html#white-2026-happen-cuidado-oral-neumonia-no-ventilada": {
+  "area": "saludpublica",
+  "claves": [
+   "neumonia"
+  ],
+  "tipo": "ensayo"
+ },
+ "resumen-2026-10-04.html#pearse-2026-klebsiella-blee-transmision-unidad-neonatal-malawi": {
+  "area": "saludpublica",
+  "claves": [
+   "blee",
+   "pediatria",
+   "transmision",
+   "genomica"
+  ],
+  "tipo": "brote"
+ },
+ "resumen-2026-10-04.html#howard-2026-algoritmo-utilidad-eleccion-antibiotico-itu": {
+  "area": "ia",
+  "claves": [
+   "itu"
+  ],
+  "tipo": "modelizacion"
+ },
+ "resumen-2026-10-04.html#ulloa-2026-calcifilaxis-ndm-pseudomonas-cefepima-zidebactam-fago": {
+  "area": "casos",
+  "claves": [
+   "carbapenemasas",
+   "pseudomonas",
+   "fagos",
+   "inmunodeprimido",
+   "nuevos-antimicrobianos"
+  ],
+  "tipo": "caso"
+ }
+}

@@ -31,39 +31,35 @@ INDICE = "indice.json"  # texto completo de cada ficha, lo carga el buscador
 MESES = ["", "enero", "febrero", "marzo", "abril", "mayo", "junio",
          "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
 
-# Areas en el orden del documento semanal, con su rotulo corto.
-# Un area nueva que aparezca en una semana no rompe nada: se anade al final
-# con el titular que traiga.
-AREAS = [
-    ("sindromes", "Síndromes"),
-    ("tuberculosis", "Tuberculosis"),
-    ("vihits", "VIH e ITS"),
-    ("patogenos", "Patógenos"),
-    ("emergentes", "Importadas y emergentes"),
-    ("antimicrobianos", "Antimicrobianos"),
-    ("proa", "PROA"),
-    ("huesped", "Huésped"),
-    ("saludpublica", "Salud pública"),
-    ("ia", "IA"),
-    ("medicina", "Medicina"),
-    ("casos", "Casos"),
-]
+# Vocabulario: categorias, tipos de articulo y palabras clave. Es copia del de
+# la skill html-articulos-semanal (reference/vocabulario.json): si cambia alli,
+# se copia aqui. El orden de las listas es el orden en pantalla.
+VOCABULARIO = "vocabulario.json"
+# Reclasificacion a mano de fichas ya publicadas, por "archivo#id". Manda
+# sobre lo que diga el HTML de la semana. Sirve para las semanas anteriores
+# al vocabulario actual y para corregir una ficha sin rehacer su semana.
+CLASIFICACION = "clasificacion.json"
 
-TIPOS = [
-    ("ensayo", "Ensayo clínico"),
-    ("cohorte", "Observacional"),
-    ("diagnostico", "Diagnóstico"),
-    ("revision", "Revisión"),
-    ("guia", "Guía o consenso"),
-    ("editorial", "Editorial o comentario"),
-    ("caso", "Caso clínico"),
-    ("brote", "Brote"),
-    ("microbiologico", "Laboratorio y genómica"),
-    ("modelizacion", "Modelización"),
-    ("estudio", "Otros estudios"),
-]
+
+def cargar_json(ruta, defecto):
+    try:
+        with open(ruta, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return defecto
+
+
+VOC = cargar_json(VOCABULARIO, {"areas": [], "tipos": [], "claves": []})
+AREAS = [(a[0], a[1]) for a in VOC["areas"]]
+TIPOS = [(t[0], t[1]) for t in VOC["tipos"]]
+CLAVES = [(grupo, [(k, n) for k, n in lista]) for grupo, lista in VOC["claves"]]
+IDS_CLAVE = {k for _, lista in CLAVES for k, _ in lista}
+
+# Areas del vocabulario anterior que pasan a una del actual cuando la ficha
+# no esta en clasificacion.json. Solo es el ultimo recurso.
+AREA_ANTIGUA = {"vihits": "vih", "vih-its": "vih", "huesped": "sindromes"}
+
 TIPO_ALIAS = {"comentario": "editorial", "carta": "editorial"}
-AREA_ALIAS = {"vih-its": "vihits"}
 REVISTA_ALIAS = {"CMI Communications": "CMI Commun"}
 
 # Semanas antiguas: el tipo no venia marcado y se deduce del diseno escrito.
@@ -200,7 +196,7 @@ def leer_fichas(s, archivo):
     area_id, orden = "", 0
     for i, (pos, clase, m) in enumerate(marcas):
         if clase == "area":
-            area_id = AREA_ALIAS.get(m.group(1), m.group(1))
+            area_id = m.group(1)
             titular = texto(re.sub(r'<span class="n">.*?</span>', "", m.group(2), flags=re.S))
             areas.append({"id": area_id, "titular": titular, "n": 0})
             continue
@@ -234,6 +230,7 @@ def leer_fichas(s, archivo):
             "orden": orden,
             "area": area_id or "otros",
             "tipo": tipo_de_ficha(primero(r'data-tipo="([^"]*)"', attrs), diseno),
+            "claves": [k for k in primero(r'data-claves="([^"]*)"', attrs).split() if k in IDS_CLAVE],
             "diseno": diseno,
             "pregunta": pregunta,
             "autor": cita["autor"],
@@ -286,6 +283,7 @@ def etiqueta_fecha(item):
 
 def nombre_area(aid, titulares):
     corto = dict(AREAS)
+    corto["otros"] = "Sin clasificar"
     return corto.get(aid) or titulares.get(aid) or aid
 
 
@@ -324,6 +322,8 @@ def construir():
             titulares[a["id"]] = a["titular"]
 
     semanas, articulos, indice = [], [], {}
+    clasif = cargar_json(CLASIFICACION, {})
+    ids_area = {a for a, _ in AREAS}
     for k, it in enumerate(items):
         f = it["fecha"]
         iso = "%04d-%02d-%02d" % f if f else ""
@@ -331,15 +331,37 @@ def construir():
                         "fecha": iso, "n": len(it["fichas"])})
         for fi in it["fichas"]:
             fi = dict(fi)
-            indice[fi["semana"] + "#" + fi["id"]] = fi.pop("_texto")
+            clave = fi["semana"] + "#" + fi["id"]
+            indice[clave] = fi.pop("_texto")
+            manual = clasif.get(clave)
+            if manual:
+                fi["area"] = manual.get("area", fi["area"])
+                fi["tipo"] = manual.get("tipo", fi["tipo"])
+                fi["claves"] = [k for k in manual.get("claves", []) if k in IDS_CLAVE]
+            fi["area"] = AREA_ANTIGUA.get(fi["area"], fi["area"])
+            if fi["area"] not in ids_area:
+                fi["area"] = "otros"
             fi["fecha"] = iso
             fi["k"] = k
             articulos.append(fi)
 
     presentes = {a["area"] for a in articulos}
     areas = [{"id": aid, "nombre": nom} for aid, nom in AREAS if aid in presentes]
-    for aid in sorted(presentes - {a for a, _ in AREAS}):
-        areas.append({"id": aid, "nombre": titulares.get(aid, aid)})
+    if "otros" in presentes:
+        areas.append({"id": "otros", "nombre": "Sin clasificar"})
+    usadas = {k for a in articulos for k in a["claves"]}
+    claves = [{"grupo": g, "claves": [{"id": k, "nombre": n} for k, n in lista if k in usadas]}
+              for g, lista in CLAVES]
+    claves = [g for g in claves if g["claves"]]
+    # recuento por area de cada semana con la clasificacion vigente
+    por_semana = {}
+    for a in articulos:
+        por_semana.setdefault(a["semana"], {}).setdefault(a["area"], 0)
+        por_semana[a["semana"]][a["area"]] += 1
+    orden = [a["id"] for a in areas]
+    for it in items:
+        c = por_semana.get(it["archivo"], {})
+        it["areas"] = [{"id": k, "n": c[k]} for k in orden if c.get(k)]
     tipos_presentes = {a["tipo"] for a in articulos}
     tipos = [{"id": t, "nombre": n} for t, n in TIPOS if t in tipos_presentes]
 
@@ -348,6 +370,7 @@ def construir():
         "semanas": semanas,
         "areas": areas,
         "tipos": tipos,
+        "claves": claves,
         "articulos": articulos,
     }
 
@@ -489,6 +512,41 @@ select.on{border-color:var(--brand);color:var(--brand-ink);font-weight:700}
 .chip.ft{background:var(--mark);color:var(--ink-strong)}
 .art .wk{font-size:13px;color:var(--muted);text-decoration:none;margin-left:auto}
 .art .wk:hover{text-decoration:underline;color:var(--brand-ink)}
+/* revista: desplegable con casillas */
+.dd{position:relative}
+.dd>summary{list-style:none;display:inline-flex;align-items:center;gap:6px;min-height:36px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink-strong);font:500 14.5px var(--f-head);padding:5px 30px 5px 13px;cursor:pointer;
+ background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 17px) 55%,calc(100% - 12px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+.dd>summary::-webkit-details-marker{display:none}
+.dd.on>summary{border-color:var(--brand);color:var(--brand-ink);font-weight:700}
+.ddp{position:absolute;z-index:20;top:calc(100% + 6px);left:0;width:min(340px,86vw);max-height:340px;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.14);padding:6px 6px 2px}
+.opt{display:flex;align-items:center;gap:10px;min-height:40px;padding:4px 8px;border-radius:6px;cursor:pointer;font-size:14.5px;color:var(--ink-strong)}
+.opt:hover{background:var(--sunken)}
+.opt input{width:18px;height:18px;accent-color:var(--brand-solid);margin:0}
+.opt .c{margin-left:auto;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.opt.off{opacity:.45;cursor:default}
+.ddp .lnk{padding:8px}
+/* palabras clave */
+.kwbox{position:relative}
+.kwin{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:42px;border:1px solid var(--line);border-radius:22px;background:var(--card);padding:4px 6px}
+.kwin:focus-within{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
+#kw{flex:1 1 200px;min-width:160px;border:0;outline:0;background:transparent;color:var(--ink-strong);font:15.5px var(--f-body);padding:6px 8px}
+.kwsel{display:contents}
+.tag{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:var(--brand-solid);color:#fff;font:600 14px var(--f-head);min-height:32px;padding:4px 8px 4px 12px;cursor:pointer}
+.tag span{font-size:17px;line-height:1;opacity:.85}
+.kwsug{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 4px);max-width:520px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 8px 24px rgba(0,0,0,.14);padding:4px}
+.sug{display:flex;align-items:baseline;gap:8px;width:100%;min-height:40px;border:0;background:none;text-align:left;padding:8px 10px;border-radius:6px;font:15px var(--f-body);color:var(--ink-strong);cursor:pointer}
+.sug.act,.sug:hover{background:var(--brand-tint)}
+.sug .c{font-weight:700;color:var(--muted)}
+.sug .g{margin-left:auto;font-size:12.5px;color:var(--muted)}
+.sug:disabled{opacity:.45;cursor:default}
+.kwsug .nada{padding:10px;font-size:14px;color:var(--muted)}
+.kwall{margin-top:8px}
+.kwall>summary{list-style:none;cursor:pointer;font:700 14px var(--f-head);color:var(--brand-ink);text-decoration:underline;padding:4px 0}
+.kwall>summary::-webkit-details-marker{display:none}
+.kg{margin-top:10px}.kg .lbl{display:block;margin-bottom:6px;color:var(--muted);font-size:11px}
+.pill.sm{min-height:32px;font-size:13.5px;padding:3px 11px}
+.chip.k{border:1px solid var(--line);background:var(--card);cursor:pointer;font-family:var(--f-head)}
+.chip.k:hover{border-color:var(--brand);color:var(--brand-ink)}
 mark{background:var(--mark);color:inherit;padding:0 2px;border-radius:3px}
 .mas{display:flex;justify-content:center;padding:14px 0 18px}
 .btn{border:1px solid var(--brand);background:var(--card);color:var(--brand-ink);border-radius:999px;min-height:44px;padding:8px 22px;font:700 15px var(--f-head);cursor:pointer}
@@ -527,6 +585,7 @@ footer p{margin:0 0 6px}
   .pills{flex-wrap:nowrap;overflow-x:auto;margin:0 -14px;padding:0 14px 4px;scrollbar-width:none}
   .pills::-webkit-scrollbar{display:none}
   .pill{flex:none}
+  .kg .pills{flex-wrap:wrap;margin:0;padding:0}
   .frow>.lbl{padding-top:0}
   .panel,.res{padding-left:14px;padding-right:14px}
   .art h3{font-size:17px}
@@ -571,17 +630,22 @@ footer p{margin:0 0 6px}
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
     <input id="q" type="search" placeholder="Palabra, fármaco, microorganismo, autor…" aria-label="Buscar en los artículos" autocomplete="off">
    </div>
-   <div class="frow"><span class="lbl" id="l-area">Tema</span><div class="pills" id="f-area" role="group" aria-labelledby="l-area"></div></div>
+   <div class="frow"><span class="lbl" id="l-area">Categoría</span><div class="pills" id="f-area" role="group" aria-labelledby="l-area"></div></div>
+   <div class="frow"><span class="lbl" id="l-kw">Palabra clave</span><div class="kwbox">
+     <div class="kwin"><div id="kw-sel" class="kwsel"></div><input id="kw" type="text" placeholder="Escribe: neumonía, inmunodeprimido, S. aureus…" aria-labelledby="l-kw" autocomplete="off" role="combobox" aria-controls="kw-sug" aria-autocomplete="list"></div>
+     <div id="kw-sug" class="kwsug" role="listbox" hidden></div>
+     <details class="kwall"><summary>Ver todas las palabras clave</summary><div id="kw-todas"></div></details>
+   </div></div>
    <div class="frow"><span class="lbl" id="l-tipo">Tipo</span><div class="pills" id="f-tipo" role="group" aria-labelledby="l-tipo"></div></div>
    <div class="frow"><span class="lbl">Más</span><div class="sels">
-     <select id="f-rev" aria-label="Revista"></select>
+     <details class="dd" id="dd-rev"><summary>Revista <span id="rev-n"></span></summary><div class="ddp"><div id="rev-lista"></div><button class="lnk" type="button" id="rev-borrar">Todas las revistas</button></div></details>
      <select id="f-per" aria-label="Periodo"></select>
      <button class="pill star-t" type="button" id="f-est" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.7l3.1 6.6 7.2.9-5.3 4.9 1.4 7.2-6.4-3.6-6.4 3.6 1.4-7.2L1.7 9.2l7.2-.9z"/></svg>Solo destacados</button>
    </div></div>
    <div class="resumen"><span class="vivo" id="vivo" aria-live="polite"></span><span><button class="lnk" type="button" id="copiar">Copiar enlace a esta búsqueda</button><span id="limpiar-w"> · <button class="lnk" type="button" id="limpiar">Limpiar</button></span></span></div>
   </div>
   <div class="card res" id="res"></div>
-  <p class="hint">Cada resultado abre la ficha dentro de su semana. Los temas son las áreas de cada resumen; el tipo de las semanas de julio a septiembre se ha deducido del diseño descrito en la ficha.</p>
+  <p class="hint">En categoría, tipo y revista puedes marcar varias: salen los artículos de cualquiera de ellas. Las palabras clave se suman: neumonía e inmunodeprimido no VIH trae los que tienen las dos. Toca una palabra clave de un resultado para filtrar por ella. Cada resultado abre la ficha dentro de su semana.</p>
  </section>
 
  <section id="semanas">
@@ -602,7 +666,7 @@ footer p{margin:0 0 6px}
 (function(){
 "use strict";
 var DATA; try{ DATA=JSON.parse(document.getElementById('data').textContent); }catch(e){ return; }
-var $=function(s){return document.querySelector(s)};
+var $=function(s,r){return (r||document).querySelector(s)};
 var ART=DATA.articulos||[];
 if(!ART.length) return;
 
@@ -610,7 +674,7 @@ var store=(function(){try{localStorage.setItem('__p','1');localStorage.removeIte
  get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},
  set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};}catch(e){return{get:function(){return null},set:function(){}}}})();
 
-/* tema */
+/* tema claro u oscuro */
 var root=document.documentElement, bt=$('#tema');
 var th=store.get('hcuz-portada-tema'); if(th) root.dataset.theme=th;
 function esOscuro(){return root.dataset.theme? root.dataset.theme==='dark' : matchMedia('(prefers-color-scheme:dark)').matches;}
@@ -622,71 +686,109 @@ bt.addEventListener('click',function(){root.dataset.theme=esOscuro()?'light':'da
 var norm=function(s){return (s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();};
 var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
 var MES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-var AREA={},TIPO={},SEM={};
+var AREA={},TIPO={},SEM={},CLAVE={};
 DATA.areas.forEach(function(a){AREA[a.id]=a.nombre;});
 DATA.tipos.forEach(function(t){TIPO[t.id]=t.nombre;});
 DATA.semanas.forEach(function(s){SEM[s.archivo]=s;});
+(DATA.claves||[]).forEach(function(g){g.claves.forEach(function(k){CLAVE[k.id]={nombre:k.nombre,grupo:g.grupo};});});
 var STAR='<svg class="st" viewBox="0 0 24 24" aria-label="Destacado" role="img"><path d="M12 1.7l3.1 6.6 7.2.9-5.3 4.9 1.4 7.2-6.4-3.6-6.4 3.6 1.4-7.2L1.7 9.2l7.2-.9z"/></svg>';
 
 ART.forEach(function(a){
- a._h=norm([a.pregunta,a.titulo,a.autor,a.revista,a.diseno,a.quedarse,AREA[a.area],TIPO[a.tipo],a.doi].join(' '));
+ a.claves=a.claves||[];
+ a._h=norm([a.pregunta,a.titulo,a.autor,a.revista,a.diseno,a.quedarse,AREA[a.area],TIPO[a.tipo],a.doi].concat(a.claves.map(function(k){return CLAVE[k]?CLAVE[k].nombre:k;})).join(' '));
  a._mes=(a.fecha||'').slice(0,7);
 });
 
-/* periodos: por mes de la seleccion */
+/* periodos, por mes de la seleccion */
 var ultima=DATA.semanas.length?DATA.semanas[0].fecha:'';
 function menosDias(iso,d){var t=new Date(iso+'T12:00:00');t.setDate(t.getDate()-d);return t.toISOString().slice(0,10);}
 var PER=[{id:'',n:'Cualquier fecha'}];
 if(ultima){PER.push({id:'1m',n:'Último mes',desde:menosDias(ultima,31)});PER.push({id:'3m',n:'Últimos 3 meses',desde:menosDias(ultima,92)});}
 var meses=[];ART.forEach(function(a){if(a._mes&&meses.indexOf(a._mes)<0)meses.push(a._mes);});
 meses.sort().reverse().forEach(function(m){PER.push({id:m,n:MES[+m.slice(5,7)-1].replace(/^./,function(c){return c.toUpperCase()})+' '+m.slice(0,4),mes:m});});
+$('#f-per').innerHTML=PER.map(function(p){return '<option value="'+p.id+'">'+esc(p.n)+'</option>';}).join('');
 
 /* revistas por frecuencia */
 var rc={};ART.forEach(function(a){if(a.revista)rc[a.revista]=(rc[a.revista]||0)+1;});
 var REV=Object.keys(rc).sort(function(x,y){return rc[y]-rc[x]||x.localeCompare(y);});
-$('#f-rev').innerHTML='<option value="">Todas las revistas</option>'+REV.map(function(r){return '<option value="'+esc(r)+'">'+esc(r)+' ('+rc[r]+')</option>';}).join('');
-$('#f-per').innerHTML=PER.map(function(p){return '<option value="'+p.id+'">'+esc(p.n)+'</option>';}).join('');
 
-/* estado */
+/* estado: dentro de tema, tipo y revista vale cualquiera de las marcadas;
+   las palabras clave se suman (neumonia y ademas inmunodeprimido) */
 var PASO=10;
-var state={q:'',area:'',tipo:'',rev:'',per:'',est:false,ver:PASO};
-function leerHash(){var p=new URLSearchParams(location.hash.slice(1));
- state.q=p.get('q')||'';state.area=p.get('tema')||'';state.tipo=p.get('tipo')||'';
- state.rev=p.get('revista')||'';state.per=p.get('periodo')||'';state.est=p.get('destacados')==='1';
- if(state.rev&&!rc[state.rev])state.rev='';
- if(!PER.some(function(x){return x.id===state.per}))state.per='';}
+function vacio(){return{q:'',area:[],tipo:[],rev:[],clave:[],per:'',est:false,ver:PASO};}
+var state=vacio();
+function lista(v,validos){return (v||'').split(',').filter(function(x){return x&&validos(x);});}
+function leerHash(){var p=new URLSearchParams(location.hash.slice(1));state=vacio();
+ state.q=p.get('q')||'';
+ state.area=lista(p.get('tema'),function(x){return AREA[x];});
+ state.tipo=lista(p.get('tipo'),function(x){return TIPO[x];});
+ state.clave=lista(p.get('clave'),function(x){return CLAVE[x];});
+ state.rev=(p.get('revista')||'').split('|').filter(function(x){return rc[x];});
+ state.per=p.get('periodo')||'';if(!PER.some(function(x){return x.id===state.per}))state.per='';
+ state.est=p.get('destacados')==='1';}
 function escribirHash(){var p=new URLSearchParams();
- if(state.q)p.set('q',state.q);if(state.area)p.set('tema',state.area);if(state.tipo)p.set('tipo',state.tipo);
- if(state.rev)p.set('revista',state.rev);if(state.per)p.set('periodo',state.per);if(state.est)p.set('destacados','1');
+ if(state.q)p.set('q',state.q);if(state.area.length)p.set('tema',state.area.join(','));
+ if(state.tipo.length)p.set('tipo',state.tipo.join(','));if(state.clave.length)p.set('clave',state.clave.join(','));
+ if(state.rev.length)p.set('revista',state.rev.join('|'));if(state.per)p.set('periodo',state.per);if(state.est)p.set('destacados','1');
  var h=p.toString();history.replaceState(null,'',h?'#'+h:location.pathname+location.search);}
 
 function pasa(a,salvo){
  var terms=norm(state.q).split(/\s+/).filter(Boolean);
  for(var i=0;i<terms.length;i++) if(a._h.indexOf(terms[i])<0) return false;
- if(salvo!=='area'&&state.area&&a.area!==state.area) return false;
- if(salvo!=='tipo'&&state.tipo&&a.tipo!==state.tipo) return false;
- if(state.rev&&a.revista!==state.rev) return false;
+ if(salvo!=='area'&&state.area.length&&state.area.indexOf(a.area)<0) return false;
+ if(salvo!=='tipo'&&state.tipo.length&&state.tipo.indexOf(a.tipo)<0) return false;
+ if(salvo!=='rev'&&state.rev.length&&state.rev.indexOf(a.revista)<0) return false;
+ for(var j=0;j<state.clave.length;j++) if(a.claves.indexOf(state.clave[j])<0) return false;
  if(state.est&&!a.destacada) return false;
  if(state.per){var p=PER.filter(function(x){return x.id===state.per})[0];
   if(p&&p.mes&&a._mes!==p.mes) return false;
   if(p&&p.desde&&a.fecha<p.desde) return false;}
  return true;
 }
-function contar(campo){var c={};ART.forEach(function(a){if(pasa(a,campo))c[a[campo]]=(c[a[campo]]||0)+1;});return c;}
+function contar(campo,fn){var c={};ART.forEach(function(a){if(pasa(a,campo))(fn?fn(a):[a[campo]]).forEach(function(k){c[k]=(c[k]||0)+1;});});return c;}
+function quita(arr,v){var i=arr.indexOf(v);if(i>=0)arr.splice(i,1);else arr.push(v);}
 
-function pills(el,lista,campo,todos){
+function pills(el,items,campo){
  var c=contar(campo),tot=0;Object.keys(c).forEach(function(k){tot+=c[k];});
- var h='<button class="pill" type="button" data-v="" aria-pressed="'+(!state[campo])+'">'+todos+' <span class="c">'+tot+'</span></button>';
- lista.forEach(function(x){var n=c[x.id]||0,on=state[campo]===x.id;
+ var h='<button class="pill" type="button" data-v="" aria-pressed="'+(!state[campo].length)+'">Todos <span class="c">'+tot+'</span></button>';
+ items.forEach(function(x){var n=c[x.id]||0,on=state[campo].indexOf(x.id)>=0;
   h+='<button class="pill" type="button" data-v="'+x.id+'" aria-pressed="'+on+'"'+(!n&&!on?' disabled':'')+'>'+esc(x.nombre)+' <span class="c">'+n+'</span></button>';});
  el.innerHTML=h;
+}
+
+function revistas(){
+ var c=contar('rev',function(a){return [a.revista];});
+ $('#rev-lista').innerHTML=REV.map(function(r){var on=state.rev.indexOf(r)>=0,n=c[r]||0;
+  return '<label class="opt'+(!n&&!on?' off':'')+'"><input type="checkbox" value="'+esc(r)+'"'+(on?' checked':'')+(!n&&!on?' disabled':'')+'><span>'+esc(r)+'</span><span class="c">'+n+'</span></label>';}).join('');
+ $('#rev-n').textContent=state.rev.length?'('+state.rev.length+')':'';
+ $('#dd-rev').classList.toggle('on',!!state.rev.length);
+}
+
+/* palabras clave: autocompletado y lista completa */
+function sugerir(){
+ var t=norm($('#kw').value.trim()),box=$('#kw-sug');
+ if(!t){box.hidden=true;box.innerHTML='';return;}
+ var c=contar('clave',function(a){return a.claves;});
+ var r=Object.keys(CLAVE).filter(function(k){return state.clave.indexOf(k)<0&&norm(CLAVE[k].nombre).indexOf(t)>=0;})
+  .sort(function(x,y){return (c[y]||0)-(c[x]||0);}).slice(0,8);
+ box.innerHTML=r.length?r.map(function(k,i){var n=c[k]||0;
+  return '<button type="button" role="option" class="sug'+(i===0?' act':'')+'" data-k="'+k+'"'+(n?'':' disabled')+'>'+esc(CLAVE[k].nombre)+' <span class="c">'+n+'</span><span class="g">'+esc(CLAVE[k].grupo)+'</span></button>';}).join('')
+  :'<div class="nada">Ninguna palabra clave contiene «'+esc($('#kw').value)+'». Prueba el buscador de texto de arriba.</div>';
+ box.hidden=false;
+}
+function addClave(k){if(k&&CLAVE[k]&&state.clave.indexOf(k)<0){state.clave.push(k);}$('#kw').value='';sugerir();cambia();}
+function claves(){
+ $('#kw-sel').innerHTML=state.clave.map(function(k){return '<button type="button" class="tag" data-k="'+k+'" aria-label="Quitar '+esc(CLAVE[k].nombre)+'">'+esc(CLAVE[k].nombre)+'<span aria-hidden="true">×</span></button>';}).join('');
+ var c=contar('clave',function(a){return a.claves;});
+ $('#kw-todas').innerHTML=(DATA.claves||[]).map(function(g){
+  return '<div class="kg"><span class="lbl">'+esc(g.grupo)+'</span><div class="pills">'+g.claves.map(function(k){var n=c[k.id]||0,on=state.clave.indexOf(k.id)>=0;
+   return '<button class="pill sm" type="button" data-k="'+k.id+'" aria-pressed="'+on+'"'+(!n&&!on?' disabled':'')+'>'+esc(k.nombre)+' <span class="c">'+n+'</span></button>';}).join('')+'</div></div>';}).join('');
 }
 
 function marca(t){
  var terms=norm(state.q).split(/\s+/).filter(function(x){return x.length>1;});
  var s=esc(t); if(!terms.length) return s;
  var n=norm(s), out='', i=0;
- /* busca en el texto normalizado y marca en el original: misma longitud porque NFD+quitar diacriticos conserva 1 a 1 en espanol */
  if(n.length!==s.length) return s;
  var re=new RegExp(terms.map(function(x){return x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}).join('|'),'g'),m;
  while((m=re.exec(n))){ if(m[0].length===0){re.lastIndex++;continue;}
@@ -695,7 +797,6 @@ function marca(t){
   out+=s.slice(i,a)+'<mark>'+s.slice(a,b)+'</mark>'; i=b; }
  return out+s.slice(i);
 }
-
 function fuera(a){
  var terms=norm(state.q).split(/\s+/).filter(Boolean); if(!terms.length) return false;
  var v=norm([a.pregunta,a.autor,a.revista,a.quedarse].join(' '));
@@ -708,47 +809,66 @@ function tarjeta(a){
  return '<article class="art"><h3>'+(a.destacada?STAR:'')+'<a href="'+href+'">'+marca(a.pregunta)+'</a></h3>'+
   '<div class="cite">'+cita+(a.doi?' · <a href="https://doi.org/'+esc(a.doi)+'" target="_blank" rel="noopener">DOI</a>':'')+'</div>'+
   (a.quedarse?'<p class="kq"><span class="k">Con qué quedarse</span>'+marca(a.quedarse)+'</p>':'')+
-  '<div class="tags">'+(fuera(a)?'<span class="chip ft">En el texto de la ficha</span>':'')+'<span class="chip a">'+esc(AREA[a.area]||a.area)+'</span><span class="chip">'+esc(TIPO[a.tipo]||a.tipo)+'</span>'+
+  '<div class="tags">'+(fuera(a)?'<span class="chip ft">En el texto de la ficha</span>':'')+
+  '<span class="chip a">'+esc(AREA[a.area]||a.area)+'</span><span class="chip">'+esc(TIPO[a.tipo]||a.tipo)+'</span>'+
+  a.claves.map(function(k){return CLAVE[k]?'<button type="button" class="chip k" data-k="'+k+'" title="Filtrar por esta palabra clave">'+esc(CLAVE[k].nombre)+'</button>':'';}).join('')+
   '<a class="wk" href="semanas/'+encodeURIComponent(a.semana)+'">Semana: '+esc(sem.etiqueta||a.semana)+'</a></div></article>';
 }
 
 function render(){
- pills($('#f-area'),DATA.areas,'area','Todos');
- pills($('#f-tipo'),DATA.tipos,'tipo','Todos');
- $('#q').value!==state.q&&($('#q').value=state.q);
- $('#f-rev').value=state.rev;$('#f-rev').classList.toggle('on',!!state.rev);
+ pills($('#f-area'),DATA.areas,'area');
+ pills($('#f-tipo'),DATA.tipos,'tipo');
+ revistas(); claves();
+ if($('#q').value!==state.q) $('#q').value=state.q;
  $('#f-per').value=state.per;$('#f-per').classList.toggle('on',!!state.per);
  $('#f-est').setAttribute('aria-pressed',state.est);
  var r=ART.filter(function(a){return pasa(a);});
  r.sort(function(x,y){return x.k-y.k||x.orden-y.orden;});
  var partes=[];
- if(state.area)partes.push(AREA[state.area]);
- if(state.tipo)partes.push(TIPO[state.tipo]);
- if(state.rev)partes.push(state.rev);
+ if(state.area.length)partes.push(state.area.map(function(x){return AREA[x];}).join(' o '));
+ if(state.tipo.length)partes.push(state.tipo.map(function(x){return TIPO[x].toLowerCase();}).join(' o '));
+ if(state.clave.length)partes.push(state.clave.map(function(x){return CLAVE[x].nombre;}).join(' y '));
+ if(state.rev.length)partes.push(state.rev.join(' o '));
  if(state.per)partes.push(PER.filter(function(x){return x.id===state.per})[0].n.toLowerCase());
  if(state.est)partes.push('destacados');
  if(state.q)partes.push('«'+state.q+'»');
  $('#vivo').textContent=r.length+(r.length===1?' artículo':' artículos')+(partes.length?' · '+partes.join(' · '):' · los más recientes primero');
  $('#limpiar-w').hidden=!partes.length;
  var el=$('#res');
- if(!r.length){el.innerHTML='<div class="vacio">Ningún artículo cumple todo a la vez. Prueba a quitar un filtro o a buscar una palabra más corta.</div>';return;}
+ if(!r.length){el.innerHTML='<div class="vacio">Ningún artículo cumple todo a la vez. Prueba a quitar un filtro o una palabra clave.</div>';return;}
  el.innerHTML=r.slice(0,state.ver).map(tarjeta).join('')+
-  (r.length>state.ver?'<div class="mas"><button class="btn" type="button" id="mas">Ver '+Math.min(PASO,r.length-state.ver)+' más (quedan '+(r.length-state.ver)+')'+'</button></div>':'');
+  (r.length>state.ver?'<div class="mas"><button class="btn" type="button" id="mas">Ver '+Math.min(PASO,r.length-state.ver)+' más (quedan '+(r.length-state.ver)+')</button></div>':'');
  var m=$('#mas'); if(m) m.addEventListener('click',function(){state.ver+=PASO;render();});
 }
 function cambia(){state.ver=PASO;escribirHash();render();}
 
-$('#f-area').addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;state.area=b.dataset.v===state.area?'':b.dataset.v;cambia();});
-$('#f-tipo').addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;state.tipo=b.dataset.v===state.tipo?'':b.dataset.v;cambia();});
-$('#f-rev').addEventListener('change',function(){state.rev=this.value;cambia();});
+function botonera(sel,campo){$(sel).addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;
+ if(!b.dataset.v)state[campo]=[];else quita(state[campo],b.dataset.v);cambia();});}
+botonera('#f-area','area');botonera('#f-tipo','tipo');
+$('#rev-lista').addEventListener('change',function(e){if(e.target.type==='checkbox'){quita(state.rev,e.target.value);cambia();}});
+$('#rev-borrar').addEventListener('click',function(){state.rev=[];cambia();});
+document.addEventListener('click',function(e){var d=$('#dd-rev');if(d.open&&!d.contains(e.target))d.open=false;
+ var s=$('#kw-sug');if(!s.hidden&&!e.target.closest('.kwbox'))s.hidden=true;});
 $('#f-per').addEventListener('change',function(){state.per=this.value;cambia();});
 $('#f-est').addEventListener('click',function(){state.est=!state.est;cambia();});
 var t;$('#q').addEventListener('input',function(){var v=this.value;clearTimeout(t);t=setTimeout(function(){state.q=v.trim();cambia();},150);});
-$('#limpiar').addEventListener('click',function(){state={q:'',area:'',tipo:'',rev:'',per:'',est:false,ver:PASO};cambia();$('#q').focus();});
+$('#kw').addEventListener('input',sugerir);
+$('#kw').addEventListener('focus',sugerir);
+$('#kw').addEventListener('keydown',function(e){
+ var bs=[].slice.call($('#kw-sug').querySelectorAll('.sug:not([disabled])')),i=bs.findIndex(function(b){return b.classList.contains('act');});
+ if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();if(!bs.length)return;if(i>=0)bs[i].classList.remove('act');i=(i+(e.key==='ArrowDown'?1:-1)+bs.length)%bs.length;bs[i].classList.add('act');}
+ else if(e.key==='Enter'){e.preventDefault();if(bs.length)addClave((bs[i>=0?i:0]).dataset.k);}
+ else if(e.key==='Escape'){$('#kw-sug').hidden=true;}
+ else if(e.key==='Backspace'&&!this.value&&state.clave.length){state.clave.pop();cambia();}});
+$('#kw-sug').addEventListener('click',function(e){var b=e.target.closest('.sug');if(b&&!b.disabled)addClave(b.dataset.k);});
+$('#kw-sel').addEventListener('click',function(e){var b=e.target.closest('.tag');if(b){quita(state.clave,b.dataset.k);cambia();}});
+$('#kw-todas').addEventListener('click',function(e){var b=e.target.closest('.pill');if(b&&!b.disabled){quita(state.clave,b.dataset.k);cambia();}});
+$('#res').addEventListener('click',function(e){var b=e.target.closest('.chip.k');if(b){if(state.clave.indexOf(b.dataset.k)<0)state.clave.push(b.dataset.k);cambia();$('#buscar').scrollIntoView({behavior:'smooth'});}});
+$('#limpiar').addEventListener('click',function(){state=vacio();cambia();$('#q').focus();});
 $('#copiar').addEventListener('click',function(){var b=this,u=location.href,ok=function(){var o=b.textContent;b.textContent='Enlace copiado';setTimeout(function(){b.textContent=o;},1600);};
  var fb=function(){var a=document.createElement('textarea');a.value=u;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');ok();}catch(e){}a.remove();};
  navigator.clipboard?navigator.clipboard.writeText(u).then(ok,fb):fb();});
-window.addEventListener('hashchange',function(){leerHash();state.ver=PASO;render();});
+window.addEventListener('hashchange',function(){leerHash();render();});
 
 leerHash();
 if(window.fetch&&location.protocol!=='file:'){

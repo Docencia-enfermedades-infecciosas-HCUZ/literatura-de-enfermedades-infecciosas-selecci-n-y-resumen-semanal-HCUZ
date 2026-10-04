@@ -5,7 +5,9 @@ Web con la selección y síntesis semanal de artículos del Servicio de Enfermed
 ## Qué hay aquí
 
 - `semanas/` — un HTML por semana. Nombre con fecha: `resumen-AAAA-MM-DD.html`.
-- `build_index.py` — construye la portada leyendo la carpeta `semanas/`: la última semana, el buscador de artículos (tema, tipo de estudio, revista, periodo, destacados y texto libre) y el listado de semanas. Lee los artículos de las fichas de cada semana, así que no hay ninguna lista que mantener. Genera también `catalogo.json` (un registro por artículo) e `indice.json` (texto completo para el buscador). No hay que ejecutarlo a mano.
+- `build_index.py`: construye la portada leyendo la carpeta `semanas/`: la última semana, el buscador de artículos (tema, tipo de estudio, revista, periodo, destacados y texto libre) y el listado de semanas. Lee los artículos de las fichas de cada semana, así que no hay ninguna lista que mantener. Genera también `catalogo.json` (un registro por artículo) e `indice.json` (texto completo para el buscador). No hay que ejecutarlo a mano.
+- `vocabulario.json`: las categorías, los tipos de artículo y la lista cerrada de palabras clave, en el orden en que salen en pantalla. Es copia del vocabulario de la skill `html-articulos-semanal`: si cambia allí, se copia aquí.
+- `clasificacion.json`: la categoría, el tipo y las palabras clave de cada ficha ya publicada, por `archivo#id`. Manda sobre lo que diga el HTML de la semana: sirve para las semanas anteriores al vocabulario actual y para corregir una ficha sin rehacer su semana.
 - `.github/workflows/deploy.yml` — automatización: al subir algo, reconstruye la portada y publica la web.
 
 `index.html` (la portada), `catalogo.json` e `indice.json` no están en el repositorio a propósito: se genera en cada publicación. No se edita a mano.
