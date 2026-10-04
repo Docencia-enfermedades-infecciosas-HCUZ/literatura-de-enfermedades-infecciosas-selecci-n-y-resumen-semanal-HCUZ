@@ -1,41 +1,343 @@
 {
  "areas": [
-  ["sindromes","Síndromes y bacteriemia","Síndromes clínicos y bacteriemia"],
-  ["patogenos","Patógenos","Patógenos y enfermedades específicas"],
-  ["antimicrobianos","Antimicrobianos","Antimicrobianos y resistencia"],
-  ["proa","PROA","PROA y uso de antimicrobianos"],
-  ["tuberculosis","Tuberculosis","Tuberculosis"],
-  ["importadas","Importadas","Infecciones importadas"],
-  ["emergentes","Emergentes","Infecciones emergentes"],
-  ["vih","VIH","VIH"],
-  ["hepatitis","Hepatitis","Hepatitis virales"],
-  ["its","ITS","Infecciones de transmisión sexual"],
-  ["saludpublica","Salud pública","Salud pública, control de infección y preparación"],
-  ["medicina","Medicina","Medicina"],
-  ["ia","IA","IA"],
-  ["casos","Casos clínicos","Casos clínicos de los que aprender"]
+  [
+   "sindromes",
+   "Síndromes y bacteriemia",
+   "Síndromes clínicos y bacteriemia"
+  ],
+  [
+   "patogenos",
+   "Patógenos",
+   "Patógenos y enfermedades específicas"
+  ],
+  [
+   "antimicrobianos",
+   "Antimicrobianos",
+   "Antimicrobianos y resistencia"
+  ],
+  [
+   "proa",
+   "PROA",
+   "PROA y uso de antimicrobianos"
+  ],
+  [
+   "tuberculosis",
+   "Tuberculosis",
+   "Tuberculosis"
+  ],
+  [
+   "importadas",
+   "Importadas",
+   "Infecciones importadas"
+  ],
+  [
+   "emergentes",
+   "Emergentes",
+   "Infecciones emergentes"
+  ],
+  [
+   "vih",
+   "VIH",
+   "VIH"
+  ],
+  [
+   "hepatitis",
+   "Hepatitis",
+   "Hepatitis virales"
+  ],
+  [
+   "its",
+   "ITS",
+   "Infecciones de transmisión sexual"
+  ],
+  [
+   "saludpublica",
+   "Salud pública",
+   "Salud pública, control de infección y preparación"
+  ],
+  [
+   "medicina",
+   "Medicina",
+   "Medicina"
+  ],
+  [
+   "ia",
+   "IA",
+   "IA"
+  ],
+  [
+   "casos",
+   "Casos clínicos",
+   "Casos clínicos de los que aprender"
+  ]
  ],
- "precedencia": [
-  ["casos","Caso único o serie de 2 o 3 casos. El diseño manda sobre el tema."],
-  ["ia","El objeto del artículo es un sistema de IA, aunque trate de una infección o de antibióticos."],
-  ["tuberculosis","Tuberculosis en cualquier forma, incluida la infección latente y el tratamiento preventivo."],
-  ["vih","Personas con VIH o PrEP frente al VIH, aunque haya coinfección por hepatitis o ITS."],
-  ["hepatitis","Hepatitis virales B, C, D y E."],
-  ["its","Sífilis, gonococo, clamidia, M. genitalium, doxiPEP y demás infecciones de transmisión sexual."],
-  ["importadas","Infección adquirida fuera de España o de Europa, o enfermedad no presente en España ni en Europa (paludismo, melioidosis, Chagas, Nipah)."],
-  ["emergentes","Infección nueva o reemergente en España o en Europa (mpox, gripe aviar, dengue autóctono, virus del Nilo occidental)."],
-  ["antimicrobianos","La molécula, el mecanismo de resistencia, la actividad in vitro o la PK/PD."],
-  ["proa","La decisión de prescribir o el programa: adecuación, consumo, intervención, política. Un ensayo que compara pautas en un síndrome va a su síndrome."],
-  ["sindromes","Un cuadro clínico o la bacteriemia, sin categoría anterior que encaje."],
-  ["patogenos","Cualquier otro microorganismo concreto y la enfermedad que produce."],
-  ["saludpublica","La unidad de análisis es la población o la institución: vacunas, vigilancia, control de infección, preparación."],
-  ["medicina","Medicina no infecciosa, metodología, razonamiento clínico, profesión."]
+ "tipos": [
+  [
+   "ensayo",
+   "Ensayo clínico"
+  ],
+  [
+   "cohorte",
+   "Observacional"
+  ],
+  [
+   "diagnostico",
+   "Diagnóstico"
+  ],
+  [
+   "revision",
+   "Revisión"
+  ],
+  [
+   "guia",
+   "Guía o consenso"
+  ],
+  [
+   "editorial",
+   "Editorial o comentario"
+  ],
+  [
+   "caso",
+   "Caso clínico"
+  ],
+  [
+   "brote",
+   "Brote"
+  ],
+  [
+   "microbiologico",
+   "Laboratorio y genómica"
+  ],
+  [
+   "modelizacion",
+   "Modelización"
+  ],
+  [
+   "estudio",
+   "Otros estudios"
+  ]
  ],
  "claves": [
-  ["Síndromes y focos", [["neumonia","Neumonía"],["itu","Infección urinaria"],["bacteriemia","Bacteriemia"],["endocarditis","Endocarditis"],["sepsis","Sepsis y shock"],["ippb","Piel y partes blandas"],["osteoarticular","Osteoarticular"],["dispositivo","Infección de dispositivo o prótesis"],["snc","Sistema nervioso central"],["intraabdominal","Intraabdominal"],["neutropenia","Fiebre neutropénica"]]],
-  ["Microorganismos", [["saureus","S. aureus"],["enterococo","Enterococo"],["estreptococo","Estreptococos y neumococo"],["blee","Enterobacterias BLEE"],["carbapenemasas","Carbapenemasas"],["pseudomonas","P. aeruginosa"],["acinetobacter","A. baumannii"],["cdifficile","C. difficile"],["mnt","Micobacterias no tuberculosas"],["candida","Candida"],["filamentosos","Hongos filamentosos"],["virus-respiratorios","Virus respiratorios"],["herpesvirus","CMV y herpesvirus"],["arbovirus","Arbovirus"],["parasitos","Parásitos"]]],
-  ["Poblaciones y ámbitos", [["inmunodeprimido","Inmunodeprimido no VIH"],["critico","Paciente crítico"],["pediatria","Pediatría y neonatos"],["embarazo","Embarazo"],["ancianos","Ancianos y residencias"],["primaria","Atención primaria"],["urgencias","Urgencias"]]],
-  ["Temas transversales", [["duracion","Duración del tratamiento"],["via-oral","Paso a vía oral"],["diagnostico-rapido","Diagnóstico rápido y biomarcadores"],["vacunas","Vacunas"],["profilaxis","Profilaxis"],["nuevos-antimicrobianos","Nuevos antimicrobianos"],["fagos","Fagoterapia"],["transmision","Transmisión hospitalaria"],["pkpd","PK/PD y dosificación"],["genomica","Genómica"],["alergia","Alergia a betalactámicos"],["tade","TADE"]]]
- ],
- "tipos": [["ensayo","Ensayo clínico"],["cohorte","Observacional"],["diagnostico","Diagnóstico"],["revision","Revisión"],["guia","Guía o consenso"],["editorial","Editorial o comentario"],["caso","Caso clínico"],["brote","Brote"],["microbiologico","Laboratorio y genómica"],["modelizacion","Modelización"],["estudio","Otros estudios"]]
+  [
+   "Síndromes y focos",
+   [
+    [
+     "neumonia",
+     "Neumonía"
+    ],
+    [
+     "itu",
+     "Infección urinaria"
+    ],
+    [
+     "bacteriemia",
+     "Bacteriemia"
+    ],
+    [
+     "endocarditis",
+     "Endocarditis"
+    ],
+    [
+     "sepsis",
+     "Sepsis y shock"
+    ],
+    [
+     "ippb",
+     "Piel y partes blandas"
+    ],
+    [
+     "osteoarticular",
+     "Osteoarticular"
+    ],
+    [
+     "dispositivo",
+     "Infección de dispositivo o prótesis"
+    ],
+    [
+     "snc",
+     "Sistema nervioso central"
+    ],
+    [
+     "intraabdominal",
+     "Intraabdominal"
+    ],
+    [
+     "neutropenia",
+     "Fiebre neutropénica"
+    ]
+   ]
+  ],
+  [
+   "Microorganismos",
+   [
+    [
+     "saureus",
+     "S. aureus"
+    ],
+    [
+     "enterococo",
+     "Enterococo"
+    ],
+    [
+     "estreptococo",
+     "Estreptococos y neumococo"
+    ],
+    [
+     "blee",
+     "Enterobacterias BLEE"
+    ],
+    [
+     "carbapenemasas",
+     "Carbapenemasas"
+    ],
+    [
+     "pseudomonas",
+     "P. aeruginosa"
+    ],
+    [
+     "acinetobacter",
+     "A. baumannii"
+    ],
+    [
+     "cdifficile",
+     "C. difficile"
+    ],
+    [
+     "mnt",
+     "Micobacterias no tuberculosas"
+    ],
+    [
+     "candida",
+     "Candida"
+    ],
+    [
+     "filamentosos",
+     "Hongos filamentosos"
+    ],
+    [
+     "virus-respiratorios",
+     "Virus respiratorios"
+    ],
+    [
+     "herpesvirus",
+     "CMV y herpesvirus"
+    ],
+    [
+     "arbovirus",
+     "Arbovirus"
+    ],
+    [
+     "parasitos",
+     "Parásitos"
+    ]
+   ]
+  ],
+  [
+   "VIH y tuberculosis",
+   [
+    [
+     "tar",
+     "Tratamiento antirretroviral"
+    ],
+    [
+     "prep",
+     "PrEP"
+    ],
+    [
+     "itl",
+     "Infección tuberculosa latente"
+    ],
+    [
+     "tb-resistente",
+     "Tuberculosis resistente"
+    ]
+   ]
+  ],
+  [
+   "Poblaciones y ámbitos",
+   [
+    [
+     "inmunodeprimido",
+     "Inmunodeprimido no VIH"
+    ],
+    [
+     "critico",
+     "Paciente crítico"
+    ],
+    [
+     "pediatria",
+     "Pediatría y neonatos"
+    ],
+    [
+     "embarazo",
+     "Embarazo"
+    ],
+    [
+     "ancianos",
+     "Ancianos y residencias"
+    ],
+    [
+     "primaria",
+     "Atención primaria"
+    ],
+    [
+     "urgencias",
+     "Urgencias"
+    ]
+   ]
+  ],
+  [
+   "Temas transversales",
+   [
+    [
+     "duracion",
+     "Duración del tratamiento"
+    ],
+    [
+     "via-oral",
+     "Paso a vía oral"
+    ],
+    [
+     "diagnostico-rapido",
+     "Diagnóstico rápido y biomarcadores"
+    ],
+    [
+     "vacunas",
+     "Vacunas"
+    ],
+    [
+     "profilaxis",
+     "Profilaxis"
+    ],
+    [
+     "nuevos-antimicrobianos",
+     "Nuevos antimicrobianos"
+    ],
+    [
+     "fagos",
+     "Fagoterapia"
+    ],
+    [
+     "transmision",
+     "Transmisión hospitalaria"
+    ],
+    [
+     "pkpd",
+     "PK/PD y dosificación"
+    ],
+    [
+     "genomica",
+     "Genómica"
+    ],
+    [
+     "alergia",
+     "Alergia a betalactámicos"
+    ],
+    [
+     "tade",
+     "TADE"
+    ]
+   ]
+  ]
+ ]
 }

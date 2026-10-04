@@ -78,13 +78,16 @@
  "resumen-2026-07-26.html#sunshine-2026-quantiferon-ifng-progresion-tb": {
   "area": "tuberculosis",
   "claves": [
+   "itl",
    "diagnostico-rapido"
   ],
   "tipo": "diagnostico"
  },
  "resumen-2026-07-26.html#gulick-2026-tar-revision-nejm": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "revision"
  },
  "resumen-2026-07-26.html#dyer-2026-resistencia-insti-tratamiento-ltbi-vih": {
@@ -97,12 +100,15 @@
  },
  "resumen-2026-07-26.html#geretti-2026-ensayos-carga-viral-viremia-bajo-nivel": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "diagnostico"
  },
  "resumen-2026-07-26.html#duarte-2026-cab-rpv-la-segunda-linea-embarazo-kenia": {
   "area": "vih",
   "claves": [
+   "tar",
    "embarazo"
   ],
   "tipo": "modelizacion"
@@ -263,6 +269,7 @@
  "resumen-2026-08-06.html#walzl-2026-avances-diagnostico-biomarcadores-tb": {
   "area": "tuberculosis",
   "claves": [
+   "itl",
    "diagnostico-rapido"
   ],
   "tipo": "revision"
@@ -270,6 +277,7 @@
  "resumen-2026-08-06.html#marais-2026-avances-tratamiento-tb": {
   "area": "tuberculosis",
   "claves": [
+   "tb-resistente",
    "duracion",
    "nuevos-antimicrobianos"
   ],
@@ -278,6 +286,7 @@
  "resumen-2026-08-06.html#da-costa-2026-vacunas-tpt-tb": {
   "area": "tuberculosis",
   "claves": [
+   "itl",
    "vacunas",
    "profilaxis"
   ],
@@ -292,12 +301,15 @@
  },
  "resumen-2026-08-06.html#gulick-2026-tar-revision-nejm": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "revision"
  },
  "resumen-2026-08-06.html#rockstroh-2026-islend1-islatravir-lenacapavir-semanal": {
   "area": "vih",
   "claves": [
+   "tar",
    "nuevos-antimicrobianos"
   ],
   "tipo": "ensayo"
@@ -305,23 +317,29 @@
  "resumen-2026-08-06.html#griesel-2026-vh-499-inhibidor-capside-cinnamon": {
   "area": "vih",
   "claves": [
+   "tar",
    "nuevos-antimicrobianos"
   ],
   "tipo": "ensayo"
  },
  "resumen-2026-08-06.html#yao-2026-regimenes-comprimido-unico-vs-multiple-vih": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "cohorte"
  },
  "resumen-2026-08-06.html#clemente-2026-consenso-viremia-bajo-nivel": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "guia"
  },
  "resumen-2026-08-06.html#atias-2026-prep-intensidad-cribado-its-prescripcion": {
   "area": "vih",
   "claves": [
+   "prep",
    "profilaxis"
   ],
   "tipo": "cohorte"
@@ -362,6 +380,7 @@
  "resumen-2026-08-24.html#zazueta-2026-ipt-infeccion-progresion-tb-lima": {
   "area": "tuberculosis",
   "claves": [
+   "itl",
    "profilaxis",
    "pediatria"
   ],
@@ -369,12 +388,15 @@
  },
  "resumen-2026-08-24.html#chivite-2026-seguimiento-anual-vs-semestral-vih": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "ensayo"
  },
  "resumen-2026-08-24.html#vera-2026-scope-vih-usuarios-prep-espana": {
   "area": "vih",
   "claves": [
+   "prep",
    "profilaxis"
   ],
   "tipo": "cohorte"
@@ -386,7 +408,9 @@
  },
  "resumen-2026-08-24.html#adachi-2026-vhb-retirada-tar-anti-vhb": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "cohorte"
  },
  "resumen-2026-08-24.html#kim-2026-bcid2-ecr-hemocultivos": {
@@ -504,7 +528,9 @@
  },
  "resumen-2026-08-30.html#bongiovanni-2026-carta-la-cab-rpv-viremia": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "editorial"
  },
  "resumen-2026-08-30.html#tran-2026-autoanticuerpos-ifn-chikungunya-snc": {
@@ -664,17 +690,23 @@
  },
  "resumen-2026-09-06.html#chen-2026-cab-rpv-la-viremia": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "ensayo"
  },
  "resumen-2026-09-06.html#chiosi-2026-editorial-la": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "editorial"
  },
  "resumen-2026-09-06.html#havens-2026-impacto-financiero-la": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "cohorte"
  },
  "resumen-2026-09-06.html#fryhofer-2026-vip-confianza": {
@@ -869,7 +901,9 @@
  },
  "resumen-2026-09-20.html#ghosn-2026-vogue-dtg-3tc-vs-bic-ftc-taf": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "ensayo"
  },
  "resumen-2026-09-20.html#reed-2026-coste-dalbavancina-dots": {
@@ -961,6 +995,7 @@
  "resumen-2026-09-27.html#selemon-2026-tpt-inmunosupresion": {
   "area": "tuberculosis",
   "claves": [
+   "itl",
    "inmunodeprimido",
    "profilaxis"
   ],
@@ -968,7 +1003,9 @@
  },
  "resumen-2026-09-27.html#mendu-2026-tar-cancer-anogenital": {
   "area": "vih",
-  "claves": [],
+  "claves": [
+   "tar"
+  ],
   "tipo": "cohorte"
  },
  "resumen-2026-09-27.html#glismann-2026-sifilis-ictus": {
@@ -1079,6 +1116,7 @@
  "resumen-2026-10-04.html#rockstroh-2026-islend1-islatravir-lenacapavir-semanal": {
   "area": "vih",
   "claves": [
+   "tar",
    "nuevos-antimicrobianos"
   ],
   "tipo": "ensayo"
